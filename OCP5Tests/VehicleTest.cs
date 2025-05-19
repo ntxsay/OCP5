@@ -251,9 +251,11 @@ namespace OCP5Tests
         #endregion
 
         
-        [Fact]
-        public void Test1()
+        [Theory]
+        [InlineData(1, 1800, 500, 9900)]
+        public void Test1(int idVehicle, double purchasePrice, double margin, double finalPrice)
         {
+            //Arrange
             var brand = new Brand()
             {
                 Id = 1,
@@ -278,9 +280,23 @@ namespace OCP5Tests
                 Year = 2017,
             };
 
-            var vehicle = new Vehicle()
+            var repair = new Repairing()
             {
                 Id = 1,
+                IdVehicle = idVehicle,
+                Name = "Réparation complète",
+                Cost = 7600
+            };
+
+            var priceMargin = new PriceMargin()
+            {
+                Id = 1,
+                Price = margin,
+            };
+
+            var vehicle = new Vehicle()
+            {
+                Id = idVehicle,
                 BrandId = brand.Id,
                 Brand = brand,
                 ModelId = model.Id,
@@ -290,8 +306,19 @@ namespace OCP5Tests
                 VehicleYearId = vehicleYear.Id,
                 VehicleYear = vehicleYear,
                 VinCode = null,
-                PurchasePrice = 1800,
+                PurchasePrice = purchasePrice,
             };
+            
+            vehicle.Repairings.Add(repair);
+            
+            //Act
+            var isPurchasePriceValid = vehicle.PurchasePrice > 0d;
+            var calcFinalPrice = vehicle.PurchasePrice + vehicle.Repairings.Select(s => s.Cost).Sum() + priceMargin.Price;
+            
+            //Assert
+            Assert.NotEmpty(vehicle.Repairings);
+            Assert.True(isPurchasePriceValid);
+            Assert.Equal(finalPrice, calcFinalPrice);
         }
     }
 }
