@@ -124,6 +124,91 @@ namespace OCP5Tests
 
         #endregion
         
+        #region Reparairing
+
+        [Theory]
+        [InlineData(1, "Restauration complète")]
+        public void CheckRepairNameIsNotNullOrWhitespace(int idVehicle, string repairName)
+        {
+            //Arrange
+            var model = new Repairing()
+            {
+                Id = 1,
+                IdVehicle = idVehicle,
+                Name = repairName,
+                Cost = 7600
+            };
+            
+            //Act
+            var isEmptyNullOrWhiteSpace = string.IsNullOrEmpty(model.Name) || string.IsNullOrWhiteSpace(model.Name);
+            
+            //Assert
+            Assert.IsType<Repairing>(model);
+            Assert.False(isEmptyNullOrWhiteSpace);
+        }
+        
+        [Theory]
+        [InlineData(1,"Restauration complète", "Restauration complète")]
+        public void CheckRepairNameEquals(int idVehicle, string expectedRepairName, string repairName)
+        {
+            //Arrange
+            var model = new Repairing()
+            {
+                Id = 1,
+                IdVehicle = idVehicle,
+                Name = repairName,
+                Cost = 7600
+            };
+            
+            
+            //Assert
+            Assert.IsType<Repairing>(model);
+            Assert.Equal(expectedRepairName, model.Name);
+        }
+        
+        [Theory]
+        [InlineData(1, 7600)]
+        public void CheckRepairCostValid(int idVehicle, double cost)
+        {
+            //Arrange
+            var model = new Repairing()
+            {
+                Id = 1,
+                IdVehicle = idVehicle,
+                Name = "Restauration complète",
+                Cost = cost
+            };
+            
+            //Act
+            var isCostValid = model.Cost > 0d;
+            
+            //Assert
+            Assert.IsType<Repairing>(model);
+            Assert.True(isCostValid);
+        }
+        
+        
+        [Theory]
+        [InlineData(1, 7600,7600)]
+        public void CheckRepairCostEqual(int idVehicle, double expectedCost, double cost)
+        {
+            //Arrange
+            var model = new Repairing()
+            {
+                Id = 1,
+                IdVehicle = idVehicle,
+                Name = "Restauration complète",
+                Cost = cost
+            };
+            
+            
+            //Assert
+            Assert.IsType<Repairing>(model);
+            Assert.Equal(expectedCost, model.Cost, model.Cost);
+        }
+
+        #endregion
+        
         #region VehicleYear
 
         [Theory]
@@ -144,8 +229,27 @@ namespace OCP5Tests
             Assert.IsType<VehicleYear>(model);
             Assert.True(isYearValid);
         }
+        
+        
+        [Theory]
+        [InlineData(2017, 2017)]
+        public void CheckVehicleYearEqual(int expectedVehicleYear, int vehicleYear)
+        {
+            //Arrange
+            var model = new VehicleYear()
+            {
+                Id = 1,
+                Year = vehicleYear,
+            };
+            
+            
+            //Assert
+            Assert.IsType<VehicleYear>(model);
+            Assert.Equal(expectedVehicleYear, model.Year);
+        }
 
         #endregion
+
         
         [Fact]
         public void Test1()
