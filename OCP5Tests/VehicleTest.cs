@@ -253,7 +253,7 @@ namespace OCP5Tests
         
         [Theory]
         [InlineData(1, 1800, 500, 9900)]
-        public void Test1(int idVehicle, double purchasePrice, double margin, double finalPrice)
+        public void VehicleValidationTest(int idVehicle, double purchasePrice, double margin, double finalPrice)
         {
             //Arrange
             var brand = new Brand()
