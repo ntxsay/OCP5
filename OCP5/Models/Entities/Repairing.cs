@@ -6,4 +6,5 @@ public class Repairing
     public int IdVehicle { get; set; }
     public string Name { get; set; } = string.Empty;
     public double Cost { get; set; }
+    public Vehicle Vehicle { get; set; } = null!;
 }

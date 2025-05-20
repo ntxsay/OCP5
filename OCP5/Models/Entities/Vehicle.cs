@@ -10,9 +10,9 @@ public class Vehicle
     public string? VinCode { get; set; }
     public double PurchasePrice { get; set; }
     
-    public Brand Brand { get; set; }
-    public Model Model { get; set; }
-    public Finition Finition { get; set; }
-    public VehicleYear VehicleYear { get; set; }
+    public Brand Brand { get; set; } = null!;
+    public Model Model { get; set; } = null!;
+    public Finition Finition { get; set; } = null!;
+    public VehicleYear VehicleYear { get; set; } = null!;
     public List<Repairing> Repairings { get; set; } = [];
 }
