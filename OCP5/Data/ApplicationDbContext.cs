@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using System.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using OCP5.Models.Entities;
 
@@ -6,6 +8,9 @@ namespace OCP5.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        private IDbConnection DbConnection { get; }
+
+        
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Repairing> Repairings { get; set; }
         public DbSet<Finition> Finitions { get; set; }
@@ -14,9 +19,18 @@ namespace OCP5.Data
         public DbSet<VehicleYear> VehicleYears { get; set; }
         public DbSet<PriceMargin> PriceMargins { get; set; }
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IConfiguration config)
             : base(options)
         {
+            DbConnection = new SqlConnection(config.GetConnectionString("DefaultConnection"));
+        }
+        
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(DbConnection.ConnectionString, providerOptions => providerOptions.EnableRetryOnFailure());
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -102,6 +116,10 @@ namespace OCP5.Data
                 .IsRequired(false);
             modelBuilder.Entity<Vehicle>()
                 .Property(x => x.PurchasePrice)
+                .HasDefaultValue(0d)
+                .IsRequired();
+            modelBuilder.Entity<Vehicle>()
+                .Property(x => x.SellingPrice)
                 .IsRequired();
             modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.Brand)
@@ -109,20 +127,32 @@ namespace OCP5.Data
                 .HasForeignKey<Vehicle>(f => f.BrandId)
                 .IsRequired();
             modelBuilder.Entity<Vehicle>()
+                .HasIndex(o => o.BrandId)
+                .IsUnique(false);
+            modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.Model)
                 .WithOne(o => o.Vehicle)
                 .HasForeignKey<Vehicle>(f => f.ModelId)
                 .IsRequired();
+            modelBuilder.Entity<Vehicle>()
+                .HasIndex(o => o.ModelId)
+                .IsUnique(false);
             modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.Finition)
                 .WithOne(o => o.Vehicle)
                 .HasForeignKey<Vehicle>(f => f.FinitionId)
                 .IsRequired();
             modelBuilder.Entity<Vehicle>()
+                .HasIndex(o => o.FinitionId)
+                .IsUnique(false);
+            modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.VehicleYear)
                 .WithOne(o => o.Vehicle)
                 .HasForeignKey<Vehicle>(f => f.VehicleYearId)
                 .IsRequired();
+            modelBuilder.Entity<Vehicle>()
+                .HasIndex(o => o.VehicleYearId)
+                .IsUnique(false);
             modelBuilder.Entity<Vehicle>()
                 .HasMany(m => m.Repairings)
                 .WithOne(o => o.Vehicle)
