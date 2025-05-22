@@ -4,11 +4,17 @@
     ViewData["Title"] = "Nos voitures";
 }
 
-<div class="page">
-    <h1 class="theme-title">@ViewData["Title"]</h1>
-    <a asp-action="Create" class="theme-button">
-        <span class="theme-button-text">+ Ajouter une voiture</span>
+<div class="themePage">
+    <h1 class="themeTitle">@ViewData["Title"]</h1>
+    <a asp-action="Create" class="themeButton">
+        <span class="themeButton__text">+ Ajouter une voiture</span>
     </a>
+    <div class="themePage__dataList --flex-wrap-two-column">
+    @foreach (var item in Model)
+    {
+        @await Html.PartialAsync("Components/Thumbnail", item)
+    }
+    </div>
 </div>
 
 

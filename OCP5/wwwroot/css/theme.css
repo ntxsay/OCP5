@@ -1,11 +1,11 @@
-.page{
+.themePage{
     display: flex;
     flex-direction: column;
     gap: 20px;
     justify-content: center;
     align-items: center;
 }
-.theme-title {
+.themeTitle {
     font-family: "Libre Baskerville", serif;
     font-weight: 400;
     font-style: italic;
@@ -13,7 +13,7 @@
     color: #796157;
 }
 
-.theme-button {
+.themeButton {
     padding: 20px 23px;
     background-color: #D9A963;
     border-radius: 5px;
@@ -21,11 +21,11 @@
     border: none;
 }
 
-.theme-button:hover {
+.themeButton:hover {
     background-color: #B99056;
 }
 
-.theme-button > .theme-button-text {
+.themeButton > .themeButton__text {
     font-family: "DM Sans", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -34,6 +34,19 @@
     color: black;
 }
 
-.theme-button > .theme-button-text:hover {
+.themeButton > .themeButton__text:hover {
     color: white;
+}
+
+.themePage__dataList{
+    
+    
+}
+.--flex-wrap-two-column {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 7px 36px;
+    justify-content: center;
+    align-items: center;
 }
