@@ -121,12 +121,17 @@ internal class DataSeeder
             {
                 new()
                 {
+                    BrandId = brands.Single(w => w.Name == "Mazda").Id,
                     Brand = brands.Single(w => w.Name == "Mazda"),
+                    ModelId = models.Single(w => w.Name == "Miata").Id,
                     Model = models.Single(w => w.Name == "Miata"),
+                    FinitionId = finitions.Single(w => w.Name == "LE").Id,
                     Finition = finitions.Single(w => w.Name == "LE"),
+                    VehicleYearId = years.Single(w => w.Year == 2019).Id,
                     VehicleYear = years.Single(w => w.Year == 2019),
                     VinCode = null,
                     PurchasePrice = 1_800,
+                    SellingPrice = 9_900,
                     Repairings = 
                     [
                         new Repairing
@@ -138,12 +143,17 @@ internal class DataSeeder
                 },
                 new()
                 {
+                    BrandId = brands.Single(w => w.Name == "Jeep").Id,
                     Brand = brands.Single(w => w.Name == "Jeep"),
+                    ModelId = models.Single(w => w.Name == "Liberty").Id,
                     Model = models.Single(w => w.Name == "Liberty"),
+                    FinitionId = finitions.Single(w => w.Name == "Sport").Id,
                     Finition = finitions.Single(w => w.Name == "Sport"),
+                    VehicleYearId = years.Single(w => w.Year == 2007).Id,
                     VehicleYear = years.Single(w => w.Year == 2007),
                     VinCode = null,
                     PurchasePrice = 4_500,
+                    SellingPrice = 5_350,
                     Repairings = 
                     [
                         new Repairing
@@ -155,12 +165,17 @@ internal class DataSeeder
                 },
                 new()
                 {
+                    BrandId = brands.Single(w => w.Name == "Renault").Id,
                     Brand = brands.Single(w => w.Name == "Renault"),
+                    ModelId = models.Single(w => w.Name == "Scénic").Id,
                     Model = models.Single(w => w.Name == "Scénic"),
+                    FinitionId = finitions.Single(w => w.Name == "TCe").Id,
                     Finition = finitions.Single(w => w.Name == "TCe"),
+                    VehicleYearId = years.Single(w => w.Year == 2007).Id,
                     VehicleYear = years.Single(w => w.Year == 2007),
                     VinCode = null,
                     PurchasePrice = 1_800,
+                    SellingPrice = 2_990,
                     Repairings = 
                     [
                         new Repairing
@@ -172,12 +187,17 @@ internal class DataSeeder
                 },
                 new()
                 {
+                    BrandId = brands.Single(w => w.Name == "Ford").Id,
                     Brand = brands.Single(w => w.Name == "Ford"),
+                    ModelId = models.Single(w => w.Name == "Explorer").Id,
                     Model = models.Single(w => w.Name == "Explorer"),
+                    FinitionId = finitions.Single(w => w.Name == "XLT").Id,
                     Finition = finitions.Single(w => w.Name == "XLT"),
+                    VehicleYearId = years.Single(w => w.Year == 2017).Id,
                     VehicleYear = years.Single(w => w.Year == 2017),
                     VinCode = null,
                     PurchasePrice = 24_350,
+                    SellingPrice = 25_950,
                     Repairings = 
                     [
                         new Repairing
@@ -189,12 +209,17 @@ internal class DataSeeder
                 },
                 new()
                 {
+                    BrandId = brands.Single(w => w.Name == "Honda").Id,
                     Brand = brands.Single(w => w.Name == "Honda"),
+                    ModelId = models.Single(w => w.Name == "Civic").Id,
                     Model = models.Single(w => w.Name == "Civic"),
+                    FinitionId = finitions.Single(w => w.Name == "LX").Id,
                     Finition = finitions.Single(w => w.Name == "LX"),
+                    VehicleYearId = years.Single(w => w.Year == 2008).Id,
                     VehicleYear = years.Single(w => w.Year == 2008),
                     VinCode = null,
                     PurchasePrice = 4_000,
+                    SellingPrice = 4_975,
                     Repairings = 
                     [
                         new Repairing
@@ -206,12 +231,17 @@ internal class DataSeeder
                 },
                 new()
                 {
+                    BrandId = brands.Single(w => w.Name == "Volkswagen").Id,
                     Brand = brands.Single(w => w.Name == "Volkswagen"),
+                    ModelId = models.Single(w => w.Name == "GTI").Id,
                     Model = models.Single(w => w.Name == "GTI"),
+                    FinitionId = finitions.Single(w => w.Name == "S").Id,
                     Finition = finitions.Single(w => w.Name == "S"),
+                    VehicleYearId = years.Single(w => w.Year == 2016).Id,
                     VehicleYear = years.Single(w => w.Year == 2016),
                     VinCode = null,
                     PurchasePrice = 15_250,
+                    SellingPrice = 16_190,
                     Repairings = 
                     [
                         new Repairing
@@ -223,12 +253,17 @@ internal class DataSeeder
                 },
                 new()
                 {
+                    BrandId = brands.Single(w => w.Name == "Ford").Id,
                     Brand = brands.Single(w => w.Name == "Ford"),
+                    ModelId = models.Single(w => w.Name == "Edge").Id,
                     Model = models.Single(w => w.Name == "Edge"),
+                    FinitionId = finitions.Single(w => w.Name == "SEL").Id,
                     Finition = finitions.Single(w => w.Name == "SEL"),
+                    VehicleYearId = years.Single(w => w.Year == 2013).Id,
                     VehicleYear = years.Single(w => w.Year == 2013),
                     VinCode = null,
                     PurchasePrice = 10_990,
+                    SellingPrice = 12_440,
                     Repairings = 
                     [
                         new Repairing
