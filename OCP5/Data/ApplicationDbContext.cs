@@ -30,7 +30,8 @@ namespace OCP5.Data
                 .Property(x => x.Id)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<PriceMargin>()
-                .Property(x => x.Price).IsRequired();
+                .Property(x => x.Price)
+                .IsRequired();
 
             //Année véhicules
             modelBuilder.Entity<VehicleYear>()
@@ -39,7 +40,8 @@ namespace OCP5.Data
                 .Property(x => x.Id)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<VehicleYear>()
-                .Property(x => x.Year).IsRequired();
+                .Property(x => x.Year)
+                .IsRequired();
 
             //Brand
             modelBuilder.Entity<Brand>()
@@ -48,7 +50,9 @@ namespace OCP5.Data
                 .Property(x => x.Id)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<Brand>()
-                .Property(x => x.Name).IsRequired();
+                .Property(x => x.Name)
+                .HasMaxLength(255)
+                .IsRequired();
 
             //Model
             modelBuilder.Entity<Model>()
@@ -57,7 +61,9 @@ namespace OCP5.Data
                 .Property(x => x.Id)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<Model>()
-                .Property(x => x.Name).IsRequired();
+                .Property(x => x.Name)                
+                .HasMaxLength(255)
+                .IsRequired();
 
             //Finition
             modelBuilder.Entity<Finition>()
@@ -66,7 +72,9 @@ namespace OCP5.Data
                 .Property(x => x.Id)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<Finition>()
-                .Property(x => x.Name).IsRequired();
+                .Property(x => x.Name)
+                .HasMaxLength(255)
+                .IsRequired();
 
             //Reparations
             modelBuilder.Entity<Repairing>()
@@ -76,6 +84,7 @@ namespace OCP5.Data
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<Repairing>()
                 .Property(x => x.Name)
+                .HasMaxLength(255)
                 .IsRequired();
             modelBuilder.Entity<Repairing>()
                 .Property(x => x.Cost)
@@ -88,6 +97,10 @@ namespace OCP5.Data
                 .Property(x => x.Id)
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<Vehicle>()
+                .Property(x => x.VinCode)
+                .HasMaxLength(255)
+                .IsRequired(false);
+            modelBuilder.Entity<Vehicle>()
                 .Property(x => x.PurchasePrice)
                 .IsRequired();
             modelBuilder.Entity<Vehicle>()
@@ -98,17 +111,17 @@ namespace OCP5.Data
             modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.Model)
                 .WithOne(o => o.Vehicle)
-                .HasForeignKey<Model>(f => f.Id)
+                .HasForeignKey<Vehicle>(f => f.ModelId)
                 .IsRequired();
             modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.Finition)
                 .WithOne(o => o.Vehicle)
-                .HasForeignKey<Finition>(f => f.Id)
+                .HasForeignKey<Vehicle>(f => f.FinitionId)
                 .IsRequired();
             modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.VehicleYear)
                 .WithOne(o => o.Vehicle)
-                .HasForeignKey<VehicleYear>(f => f.Id)
+                .HasForeignKey<Vehicle>(f => f.VehicleYearId)
                 .IsRequired();
             modelBuilder.Entity<Vehicle>()
                 .HasMany(m => m.Repairings)
