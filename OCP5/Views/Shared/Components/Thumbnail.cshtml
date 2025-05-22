@@ -1,0 +1,17 @@
+﻿@model OCP5.Models.ViewModels.VehicleThumbnailViewModel
+
+<div class="thumbnail">
+    <figure>
+        <img src="2019_Toyota_Corolla_Icon_Tech_VVT-i_Hybrid_1.8.jpg" alt="voiture"/>
+        <figcaption>An elephant at sunset</figcaption>
+    </figure>
+    <div class="thumbnail__featuresContainer">
+        <ul class="thumbnail__thumbnailFeatures">
+            <li class="thumbnailFeatures__feature price">@Model.SellingPrice.ToString("C")</li>
+            <li class="thumbnailFeatures__feature">@Model.Year</li>
+            <li class="thumbnailFeatures__feature">@Model.BrandName</li>
+            <li class="thumbnailFeatures__feature">@Model.ModelName</li>
+            <li class="thumbnailFeatures__feature">@Model.FinitionName</li>
+        </ul>
+    </div>
+</div>
