@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OCP5.Data;
 
-namespace OCP5.Services;
+namespace OCP5.Services.Repositories;
 
 public interface IRepository<T> where T : class
 {
