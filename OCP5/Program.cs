@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OCP5.Data;
+using OCP5.Extensions;
+using OCP5.Services;
+using OCP5.Services.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,12 +18,19 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<IYearRepository, YearRepository>();
+builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+builder.Services.AddScoped<IModelRepository, ModelRepository>();
+builder.Services.AddScoped<IFinitionRepository, FinitionRepository>();
+builder.Services.AddScoped<IVehiclesRepository, VehiclesRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.SeedDatabase(app.Configuration);
 }
 else
 {
@@ -38,7 +48,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Vehicles}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 app.MapRazorPages()
