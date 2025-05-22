@@ -1,0 +1,39 @@
+.page{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.theme-title {
+    font-family: "Libre Baskerville", serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 44px;
+    color: #796157;
+}
+
+.theme-button {
+    padding: 20px 23px;
+    background-color: #D9A963;
+    border-radius: 5px;
+    text-decoration: none;
+    border: none;
+}
+
+.theme-button:hover {
+    background-color: #B99056;
+}
+
+.theme-button > .theme-button-text {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: black;
+}
+
+.theme-button > .theme-button-text:hover {
+    color: white;
+}
