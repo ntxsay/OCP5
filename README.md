@@ -16,6 +16,7 @@ SSMS : https://learn.microsoft.com/fr-fr/ssms/install/install
 **Remarques** : 
 
 - MSSQL Server n'est disponible que pour **Windows** et les systèmes d'exploitations basés sur **LINUX tels qu'Ubuntu, Fedora, etc**. Si vous utilisez un système d'exploitation non compatible, vous devrez utiliser un conteneur Docker avec MSSQL Server ou exécuter une machine virtuelle Windows.
+- Le type d’authentification est « **Authentification Windows** »
 - Les versions antérieures de MSSQL Server devraient fonctionner sans problème, mais elles n’ont pas été testées.
 - Si SSMS n'est pas disponible sur votre machine ou si vous le souhaitez, vous pouvez utiliser un autre outil d'administration de base de données, tel que DBeaver, le plug-in MSSQL sur Visual Studio Code, le plug-in Database sur les IDE JetBrains ou un autre outil de votre choix. Cependant, il est recommandé d'utiliser SSMS pour ce projet, car il peut être plus facile à utiliser.
 
