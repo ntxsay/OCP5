@@ -98,7 +98,7 @@ internal class DataSeeder
     /// <param name="context"></param>
     private static void InsertVehicules(ApplicationDbContext context)
     {
-        //Ajout des années des véhicules
+        //Ajout des véhicules
         if (!context.Vehicles.Any())
         {
             var years = context.VehicleYears.Where(w =>
