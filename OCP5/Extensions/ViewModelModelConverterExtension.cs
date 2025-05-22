@@ -32,4 +32,17 @@ public static class ViewModelModelConverterExtension
             SellingPrice = self.SellingPrice,
         };
     }
+    
+    public static VehicleThumbnailViewModel ConvertToThumbnailViewModel(this Vehicle self)
+    {
+        return new VehicleThumbnailViewModel()
+        {
+            Id = self.Id,
+            BrandName = self.Brand.Name,
+            ModelName = self.Model.Name,
+            FinitionName = self.Finition.Name,
+            Year = self.VehicleYear.Year,
+            SellingPrice = self.SellingPrice,
+        };
+    }
 }
