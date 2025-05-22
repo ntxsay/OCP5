@@ -24,7 +24,6 @@ public class VehicleViewModel
     [Required (ErrorMessage = "Veuillez sélectionner une année.")]
     public int VehicleYearId { get; set; }
     
-    
     [DisplayName("Prix de vente")]
     [Required(ErrorMessage = "Veuillez saisir un prix de vente.")]
     [DataType(DataType.Currency)]
@@ -32,6 +31,7 @@ public class VehicleViewModel
     public double SellingPrice { get; set; }
     
     [Display(Name = "Visuel")]
+    [FileExtensions(Extensions = ".jpg, .png, .jpeg", ErrorMessage = "Veuillez sélectionner un fichier image valide (jpg, png, jpeg).")]
     public IFormFile? File { get; set; }
 
     public SelectList? Brands { get; set; } = null!;
