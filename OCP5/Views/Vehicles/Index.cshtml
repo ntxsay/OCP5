@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OCP5.Models.Entities.Vehicle>
+﻿@model IEnumerable<OCP5.Models.ViewModels.VehicleThumbnailViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,22 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.VinCode)
+                @Html.DisplayNameFor(model => model.SellingPrice)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PurchasePrice)
+                @Html.DisplayNameFor(model => model.Year)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Brand)
+                @Html.DisplayNameFor(model => model.BrandName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Model)
+                @Html.DisplayNameFor(model => model.ModelName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Finition)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VehicleYear)
+                @Html.DisplayNameFor(model => model.FinitionName)
             </th>
             <th></th>
         </tr>
@@ -37,22 +34,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.VinCode)
+                @Html.DisplayFor(modelItem => item.SellingPrice)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PurchasePrice)
+                @Html.DisplayFor(modelItem => item.Year)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Brand.Name)
+                @Html.DisplayFor(modelItem => item.BrandName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Model.Name)
+                @Html.DisplayFor(modelItem => item.ModelName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Finition.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VehicleYear.Id)
+                @Html.DisplayFor(modelItem => item.FinitionName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

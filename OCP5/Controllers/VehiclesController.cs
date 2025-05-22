@@ -19,7 +19,7 @@ namespace OCP5.Controllers
         // GET: Vehicles
         public async Task<IActionResult> Index()
         {
-            var models = await vehiculeRepository.GetAllAsync();
+            var models = await vehiculeRepository.GetAllThumbnailAsync();
             return View(models);
         }
 
