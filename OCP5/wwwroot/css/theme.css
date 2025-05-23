@@ -6,6 +6,10 @@
     align-items: center;
 }
 
+.themeNav__gap{
+    gap: 20px;
+}
+
 .themeNav__textLogo{
     font-family: "Libre Baskerville", serif;
     font-weight: 700;
