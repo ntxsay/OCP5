@@ -1,12 +1,9 @@
-using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OCP5.Data;
+using OCP5.Data.Seeders;
 using OCP5.Extensions;
-using OCP5.Services;
 using OCP5.Services.Repositories;
-
-Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("fr-FR");
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +14,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
@@ -45,6 +43,7 @@ else
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
@@ -57,4 +56,5 @@ app.MapControllerRoute(
 app.MapRazorPages()
    .WithStaticAssets();
 
+await IdentityDataSeeder.EnsurePopulated(app);
 app.Run();

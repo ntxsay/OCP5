@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -33,7 +34,8 @@ namespace OCP5.Controllers
 
             return View(vehicle);
         }
-
+        
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
             var viewModel = await vehiculeRepository.EmptyViewModelAsync();
@@ -41,6 +43,7 @@ namespace OCP5.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(VehicleViewModel viewModel)
         {
@@ -61,6 +64,7 @@ namespace OCP5.Controllers
         }
 
         // GET: Vehicles/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -78,6 +82,7 @@ namespace OCP5.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, VehicleViewModel viewModel)
         {
@@ -108,6 +113,7 @@ namespace OCP5.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
         {

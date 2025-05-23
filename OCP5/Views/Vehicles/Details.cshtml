@@ -1,4 +1,6 @@
-﻿@model OCP5.Models.ViewModels.VehicleThumbnailViewModel
+﻿@inject SignInManager<IdentityUser> SignInManager
+@using Microsoft.AspNetCore.Identity
+@model OCP5.Models.ViewModels.VehicleThumbnailViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -16,18 +18,22 @@
                 <figcaption></figcaption>
             </figure>
             <div class="themePage__detailsContainer__featuresContainer toTopItemsAlign">
-                <div class="themePage__detailsContainer__featuresContainer__adminOptions">
-                    <p>Vous avez publié cette annonce, vous pouvez le :</p>
-                    <ul>
-                        <li><a asp-action="Edit" asp-route-id="@Model.Id" class="adminOptions__edit">Modifier</a></li>
-                        <li>
-                            <form asp-action="Delete">
-                                <input type="hidden" asp-for="Id" />
-                                <input type="submit" value="Supprimer" class="adminOptions__delete" />
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                    <div class="themePage__detailsContainer__featuresContainer__adminOptions">
+                        <p>Vous avez publié cette annonce, vous pouvez le :</p>
+                        <ul>
+                            <li><a asp-action="Edit" asp-route-id="@Model.Id" class="adminOptions__edit">Modifier</a></li>
+                            <li>
+                                <form asp-action="Delete">
+                                    <input type="hidden" asp-for="Id"/>
+                                    <input type="submit" value="Supprimer" class="adminOptions__delete"/>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                }
+                
                 <ul class="themePage__detailsContainer__featuresContainer__featuresList">
                     <li class="themePage__detailsContainer__featuresContainer__featuresList__item mainFeature">@Model.SellingPrice.ToString("C")</li>
                     <li class="themePage__detailsContainer__featuresContainer__featuresList__item">@Model.Year</li>

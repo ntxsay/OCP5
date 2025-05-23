@@ -1,4 +1,6 @@
-﻿@model IEnumerable<OCP5.Models.ViewModels.VehicleThumbnailViewModel>
+﻿@inject SignInManager<IdentityUser> SignInManager
+@using Microsoft.AspNetCore.Identity
+@model IEnumerable<OCP5.Models.ViewModels.VehicleThumbnailViewModel>
 
 @{
     ViewData["Title"] = "Nos voitures";
@@ -6,9 +8,12 @@
 
 <div class="themePage themePage__with__paddingTop">
     <h1 class="themeTitle">@ViewData["Title"]</h1>
-    <a asp-action="Create" class="themeButton">
-        <span class="themeButton__text">+ Ajouter une voiture</span>
-    </a>
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+    {
+        <a asp-action="Create" class="themeButton">
+            <span class="themeButton__text">+ Ajouter une voiture</span>
+        </a>
+    }
     <div class="themePage__dataList">
     @foreach (var item in Model)
     {
