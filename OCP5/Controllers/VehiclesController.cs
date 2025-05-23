@@ -16,14 +16,12 @@ namespace OCP5.Controllers
 {
     public class VehiclesController(IVehiclesRepository vehiculeRepository) : Controller
     {
-        // GET: Vehicles
         public async Task<IActionResult> Index()
         {
             var models = await vehiculeRepository.GetAllThumbnailAsync();
             return View(models);
         }
 
-        // GET: Vehicles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,23 +34,26 @@ namespace OCP5.Controllers
             return View(vehicle);
         }
 
-        // GET: Vehicles/Create
         public async Task<IActionResult> Create()
         {
             var viewModel = await vehiculeRepository.EmptyViewModelAsync();
             return View(viewModel);
         }
 
-        // POST: Vehicles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(VehicleViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                await vehiculeRepository.SaveDataAsync(viewModel);
+                try
+                {
+                    await vehiculeRepository.SaveDataAsync(viewModel);
+                }
+                catch (Exception)
+                {
+                    return NotFound();
+                }
                 return View("Published");
             }
 
@@ -96,7 +97,7 @@ namespace OCP5.Controllers
                 {
                     await vehiculeRepository.UpdateDataAsync(viewModel);
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
                    return NotFound();
                 }
