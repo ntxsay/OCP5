@@ -1,9 +1,12 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OCP5.Data;
 using OCP5.Extensions;
 using OCP5.Services;
 using OCP5.Services.Repositories;
+
+Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("fr-FR");
 
 var builder = WebApplication.CreateBuilder(args);
 

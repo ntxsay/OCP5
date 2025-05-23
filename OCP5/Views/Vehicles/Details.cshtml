@@ -2,24 +2,30 @@
 
 @{
     ViewData["Title"] = "Details";
+    var itemName = $"{Model.Year} {Model.BrandName} {Model.ModelName} {Model.FinitionName}";
 }
 
-<div class="themePage">
+<div class="themePage themePage__with__paddingTop">
     <div class="themePage__subPage">
         <div class="themePage__detailsNavigation">
             <a asp-action="Index">⟵ Retour</a>
         </div>
         <div class="themePage__detailsContainer">
             <figure>
-                <img src="~/2019_Toyota_Corolla_Icon_Tech_VVT-i_Hybrid_1.8.jpg" alt="voiture"/>
+                <img src="~/2019_Toyota_Corolla_Icon_Tech_VVT-i_Hybrid_1.8.jpg" alt="@itemName"/>
                 <figcaption></figcaption>
             </figure>
-            <div class="themePage__detailsContainer__featuresContainer">
-                <div>
+            <div class="themePage__detailsContainer__featuresContainer toTopItemsAlign">
+                <div class="themePage__detailsContainer__featuresContainer__adminOptions">
                     <p>Vous avez publié cette annonce, vous pouvez le :</p>
                     <ul>
-                        <li><a asp-action="Edit" asp-route-id="@Model.Id">Modifier</a></li>
-                        <li><a asp-action="Delete" asp-route-id="@Model.Id">Modifier</a></li>
+                        <li><a asp-action="Edit" asp-route-id="@Model.Id" class="adminOptions__edit">Modifier</a></li>
+                        <li>
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="Id" />
+                                <input type="submit" value="Supprimer" class="adminOptions__delete" />
+                            </form>
+                        </li>
                     </ul>
                 </div>
                 <ul class="themePage__detailsContainer__featuresContainer__featuresList">

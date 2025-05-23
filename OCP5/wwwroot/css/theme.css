@@ -6,6 +6,10 @@
     align-items: center;
 }
 
+.themePage.themePage__with__paddingTop{
+    padding-top: 190px;
+}
+
 .themePage__subPage {
     display: flex;
     flex-direction: column;
@@ -109,6 +113,7 @@
 /*Index*/
 
 .themePage__dataList {
+    margin-top: 70px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -142,7 +147,7 @@
 .themePage__detailsContainer {
     display: grid;
     grid-template-columns:auto 1fr;
-    gap: 56px;
+    gap: 20px;
 }
 
 .themePage__detailsContainer > figure {
@@ -169,11 +174,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    gap: 64px;
+}
+
+.themePage__detailsContainer__featuresContainer.toTopItemsAlign {
+    justify-content: flex-start;
 }
 
 .themePage__detailsContainer__featuresContainer__featuresList {
     display: flex;
     padding: 0;
+    margin-left: 36px;
     flex-direction: column;
     list-style: none;
     gap: 24px;
@@ -191,6 +202,42 @@
     font-size: 28px;
     color: #2C1810;
     margin-bottom: 29px;
+}
+
+.themePage__detailsContainer__featuresContainer__adminOptions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 7px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 16px;
+}
+
+.themePage__detailsContainer__featuresContainer__adminOptions p{
+    color: #2C1810;
+    margin: 0;
+}
+
+.themePage__detailsContainer__featuresContainer__adminOptions ul{
+    display: flex;
+    flex-direction: row;
+    gap: 21px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.themePage__detailsContainer__featuresContainer__adminOptions ul a.adminOptions__edit{
+    color: #929292;
+}
+
+.themePage__detailsContainer__featuresContainer__adminOptions ul .adminOptions__delete{
+    color: #D70000;
+    text-decoration: underline;
+    border:none;
+    padding: 0;
+    background: none;
 }
 
 /*Form*/

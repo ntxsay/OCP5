@@ -16,6 +16,9 @@ public interface IVehiclesRepository : IRepository<Vehicle>
     public Task<VehicleViewModel?> GetViewModelByIdAsync(int id, bool addSelectList = true);
     public void UpdateData(VehicleViewModel viewModel);
     public Task UpdateDataAsync(VehicleViewModel viewModel);
+    public Task RemoveDataAsync(Vehicle entity);
+    public Task RemoveDataAsync(int id);
+    public void RemoveData(Vehicle entity);
     public Task<bool> ExistsAsync(int id);
     public Task<VehicleViewModel> EmptyViewModelAsync();
 }
@@ -116,6 +119,7 @@ public class VehiclesRepository(ApplicationDbContext context, IYearRepository ye
         var model = viewModel.ConvertToModel();
         await Context.Vehicles.AddAsync(model);
         await SaveChangesAsync();
+        viewModel.Id = model.Id;
     }
     
     public void UpdateData(VehicleViewModel viewModel)
@@ -135,6 +139,34 @@ public class VehiclesRepository(ApplicationDbContext context, IYearRepository ye
             var model = viewModel.ConvertToModel();
             Context.Vehicles.Update(model);
             await Context.SaveChangesAsync();
+        }
+    }
+    
+    public async Task RemoveDataAsync(Vehicle entity)
+    {
+        if (entity.Id > 0)
+        {
+            Remove(entity);
+            await Context.SaveChangesAsync();
+        }
+    }
+    
+    public async Task RemoveDataAsync(int id)
+    {
+        var entity = await GetByIdAsync(id);
+        if (entity != null)
+        {
+            Remove(entity);
+            await Context.SaveChangesAsync();
+        }
+    }
+    
+    public void RemoveData(Vehicle entity)
+    {
+        if (entity.Id > 0)
+        {
+            Remove(entity);
+            Context.SaveChanges();
         }
     }
     

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Nos voitures";
 }
 
-<div class="themePage">
+<div class="themePage themePage__with__paddingTop">
     <h1 class="themeTitle">@ViewData["Title"]</h1>
     <a asp-action="Create" class="themeButton">
         <span class="themeButton__text">+ Ajouter une voiture</span>
@@ -12,7 +12,8 @@
     <div class="themePage__dataList">
     @foreach (var item in Model)
     {
-        <a asp-action="Details" asp-route-id="@item.Id" class="themePage__dataList__itemLink">
+        var itemName = $"{item.Year} {item.BrandName} {item.ModelName} {item.FinitionName}";
+        <a asp-action="Details" asp-route-id="@item.Id" class="themePage__dataList__itemLink" title="@itemName">
             @await Html.PartialAsync("Components/Thumbnail", item)
         </a>
     }

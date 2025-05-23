@@ -53,8 +53,7 @@ namespace OCP5.Controllers
             if (ModelState.IsValid)
             {
                 await vehiculeRepository.SaveDataAsync(viewModel);
-                
-                return RedirectToAction(nameof(Index));
+                return View("Published");
             }
 
             return View(viewModel);
@@ -77,9 +76,6 @@ namespace OCP5.Controllers
             return View(viewModel);
         }
 
-        // POST: Vehicles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, VehicleViewModel viewModel)
@@ -98,7 +94,7 @@ namespace OCP5.Controllers
                 
                 try
                 {
-                    vehiculeRepository.UpdateDataAsync(viewModel);
+                    await vehiculeRepository.UpdateDataAsync(viewModel);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -109,37 +105,23 @@ namespace OCP5.Controllers
 
             return View(viewModel);
         }
-
-        // GET: Vehicles/Delete/5
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
-            var vehicle = await vehiculeRepository.GetByIdAsync(id.Value);
-            if (vehicle == null)
-            {
+            var model = await vehiculeRepository.GetByIdAsync(id.Value);
+            if (model == null)
                 return NotFound();
-            }
-
-            return View(vehicle);
-        }
-
-        // POST: Vehicles/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var vehicle = await vehiculeRepository.GetByIdAsync(id);
-            if (vehicle != null)
-            {
-                vehiculeRepository.Remove(vehicle);
-            }
-
-            await vehiculeRepository.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            
+            var fullName = $"{model.VehicleYear.Year} {model.Brand.Name} {model.Model.Name} {model.Finition.Name}";
+            
+            await vehiculeRepository.RemoveDataAsync(model);
+            
+            return View("DeletedConfirmation", fullName);
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿@model OCP5.Models.ViewModels.VehicleThumbnailViewModel
-
+@{
+    var itemName = $"{Model.Year} {Model.BrandName} {Model.ModelName} {Model.FinitionName}";
+}
 <div class="thumbnail">
     <figure>
-        <img src="2019_Toyota_Corolla_Icon_Tech_VVT-i_Hybrid_1.8.jpg" alt="voiture"/>
+        <img src="2019_Toyota_Corolla_Icon_Tech_VVT-i_Hybrid_1.8.jpg" alt="@itemName"/>
         <figcaption></figcaption>
     </figure>
     <div class="thumbnail__featuresContainer">
