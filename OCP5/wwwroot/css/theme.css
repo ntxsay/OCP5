@@ -305,3 +305,20 @@
     justify-content: center;
     flex-direction: column;
 }
+
+/*Log in*/
+
+.themePage__login__appLogo {
+    font-family: "Libre Baskerville", serif;
+    font-weight: 700;
+    font-size: 41px;
+    color: #2C1810;
+}
+
+.themePage_login__actionContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}

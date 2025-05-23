@@ -1,0 +1,35 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "S'inscrire";
+}
+
+<div class="themePage themePage__with__paddingTop">
+    <h2 class="themePage__login__appLogo">Express Voitures</h2>
+    <div class="themePage__Form">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div class="form-group">
+                <label asp-for="Input.Email" class="control-label"></label>
+                <input asp-for="Input.Email" class ="form-control" autocomplete="username" aria-required="true"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Password" class="control-label"></label>
+                <input asp-for="Input.Password" class ="form-control" autocomplete="new-password" aria-required="true"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.ConfirmPassword" class="control-label"></label>
+                <input asp-for="Input.ConfirmPassword" class ="form-control"  autocomplete="new-password" aria-required="true"/>
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="themePage_login__actionContainer">
+                <button id="registerSubmit" type="submit" class="themeButton">S'inscrire</button>
+                <span>ou</span>
+                <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="themeButton">Se connecter</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
