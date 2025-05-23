@@ -29,7 +29,7 @@ namespace OCP5.Controllers
             if (id == null)
                 return NotFound();
 
-            var vehicle = await vehiculeRepository.GetByIdAsync(id.Value);
+            var vehicle = await vehiculeRepository.GetThumbnailAsync(id.Value);
             if (vehicle == null)
                 return NotFound();
 

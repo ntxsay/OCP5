@@ -1,54 +1,28 @@
-﻿@model OCP5.Models.Entities.Vehicle
+﻿@model OCP5.Models.ViewModels.VehicleThumbnailViewModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Vehicle</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VinCode)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VinCode)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PurchasePrice)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PurchasePrice)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Brand)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Brand.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Model)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Finition)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Finition.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VehicleYear)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VehicleYear.Id)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="themePage">
+    <div class="themePage__subPage">
+        <div class="themePage__detailsNavigation">
+            <a asp-action="Index">⟵ Retour</a>
+        </div>
+        <div class="themePage__detailsContainer">
+            <figure>
+                <img src="~/2019_Toyota_Corolla_Icon_Tech_VVT-i_Hybrid_1.8.jpg" alt="voiture"/>
+                <figcaption></figcaption>
+            </figure>
+            <div class="themePage__detailsContainer__featuresContainer">
+                <ul class="themePage__detailsContainer__featuresContainer__featuresList">
+                    <li class="themePage__detailsContainer__featuresContainer__featuresList__item mainFeature">@Model.SellingPrice.ToString("C")</li>
+                    <li class="themePage__detailsContainer__featuresContainer__featuresList__item">@Model.Year</li>
+                    <li class="themePage__detailsContainer__featuresContainer__featuresList__item">@Model.BrandName</li>
+                    <li class="themePage__detailsContainer__featuresContainer__featuresList__item">@Model.ModelName</li>
+                    <li class="themePage__detailsContainer__featuresContainer__featuresList__item">@Model.FinitionName</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>

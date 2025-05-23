@@ -8,6 +8,8 @@ namespace OCP5.Services.Repositories;
 
 public interface IVehiclesRepository : IRepository<Vehicle>
 {
+    public Task<VehicleThumbnailViewModel?> GetThumbnailAsync(int id);
+    public VehicleThumbnailViewModel? GetThumbnail(int id);
     public Task<IEnumerable<VehicleThumbnailViewModel>> GetAllThumbnailAsync();
     public IEnumerable<VehicleThumbnailViewModel> GetAllThumbnail();
     public Task SaveDataAsync(VehicleViewModel viewModel);
@@ -37,6 +39,21 @@ public class VehiclesRepository(ApplicationDbContext context, IYearRepository ye
             .Include(v => v.Model)
             .Include(v => v.VehicleYear)
             .Select(s => s.ConvertToThumbnailViewModel()).ToArray();
+    }
+    
+    public async Task<VehicleThumbnailViewModel?> GetThumbnailAsync(int id)
+    {
+        var model = await GetByIdAsync(id);
+
+        var viewModel = model?.ConvertToThumbnailViewModel();
+        return viewModel;
+    }
+
+    public VehicleThumbnailViewModel? GetThumbnail(int id)
+    {
+        var model = GetById(id);
+        var viewModel = model?.ConvertToThumbnailViewModel();
+        return viewModel;
     }
     
     public override async Task<Vehicle?> GetByIdAsync(int id)

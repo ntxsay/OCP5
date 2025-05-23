@@ -1,5 +1,4 @@
 .thumbnail{
-    width: 48%;
     display: grid;
     grid-template-columns:2fr 1fr;
     gap:10px;
@@ -46,7 +45,7 @@
     font-size:18px;
 }
 
-.thumbnail__thumbnailFeatures > .thumbnailFeatures__feature.price{
+.thumbnail__thumbnailFeatures > .thumbnailFeatures__feature.mainFeature{
     font-family: "Libre Baskerville", serif;
     font-weight: 700;
     font-size: 22px;

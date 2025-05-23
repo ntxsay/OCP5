@@ -12,7 +12,9 @@
     <div class="themePage__dataList">
     @foreach (var item in Model)
     {
-        @await Html.PartialAsync("Components/Thumbnail", item)
+        <a asp-action="Details" asp-route-id="@item.Id" class="themePage__dataList__itemLink">
+            @await Html.PartialAsync("Components/Thumbnail", item)
+        </a>
     }
     </div>
 </div>

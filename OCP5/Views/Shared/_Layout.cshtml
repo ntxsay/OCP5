@@ -1,5 +1,4 @@
 ﻿@{
-    var routeName = ViewContext.ActionDescriptor.AttributeRouteInfo?.Name;
     var controllerName = ViewContext.RouteData.Values["controller"]?.ToString();
     var actionName = ViewContext.RouteData.Values["action"]?.ToString();
     var isHomeSelected = controllerName == "Vehicles" && actionName == "Index";
