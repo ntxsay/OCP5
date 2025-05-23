@@ -1,4 +1,4 @@
-.themePage{
+.themePage {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-.themePage__subPage{
+.themePage__subPage {
     display: flex;
     flex-direction: column;
     gap: 57px;
@@ -14,18 +14,18 @@
     align-items: center;
 }
 
-.themeNav__gap{
+.themeNav__gap {
     gap: 20px;
 }
 
-.themeNav__textLogo{
+.themeNav__textLogo {
     font-family: "Libre Baskerville", serif;
     font-weight: 700;
     font-size: 20px;
     color: #2C1810;
 }
 
-.themeNav__item{
+.themeNav__item {
     font-family: "Libre Baskerville", serif;
     font-weight: 400;
     font-size: 14px;
@@ -85,7 +85,7 @@
     color: white;
 }
 
-.themeAddButton{
+.themeAddButton {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,7 +108,7 @@
 
 /*Index*/
 
-.themePage__dataList{
+.themePage__dataList {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -117,15 +117,15 @@
     align-items: center;
 }
 
-.themePage__dataList__itemLink{
+.themePage__dataList__itemLink {
     text-decoration: none;
     width: 48%;
 }
 
 /*Details*/
 
-.themePage__detailsNavigation{
-   width: 100%;
+.themePage__detailsNavigation {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -141,18 +141,18 @@
 
 .themePage__detailsContainer {
     display: grid;
-    grid-template-columns:2fr 1fr;
-    gap:56px;
-    aspect-ratio: 594/316;
-    height: 595px;
+    grid-template-columns:auto 1fr;
+    gap: 56px;
 }
 
-.themePage__detailsContainer > figure{
+.themePage__detailsContainer > figure {
+    aspect-ratio: 625/595;
+    height: 595px;
     position: relative;
     margin: 0;
 }
 
-.themePage__detailsContainer > figure > figcaption{
+.themePage__detailsContainer > figure > figcaption {
     position: absolute;
     bottom: 0;
 }
@@ -172,29 +172,30 @@
 }
 
 .themePage__detailsContainer__featuresContainer__featuresList {
-    display:flex;
+    display: flex;
     padding: 0;
     flex-direction: column;
     list-style: none;
-    gap: 10px;
+    gap: 24px;
 }
 
-.themePage__detailsContainer__featuresContainer__featuresList__item{
+.themePage__detailsContainer__featuresContainer__featuresList__item {
     font-family: "DM Sans", sans-serif;
     color: #796157;
-    font-size:18px;
+    font-size: 18px;
 }
 
-.themePage__detailsContainer__featuresContainer__featuresList__item.mainFeature{
+.themePage__detailsContainer__featuresContainer__featuresList__item.mainFeature {
     font-family: "Libre Baskerville", serif;
     font-weight: 700;
     font-size: 28px;
     color: #2C1810;
+    margin-bottom: 29px;
 }
 
 /*Form*/
 
-.themePage__Form{
+.themePage__Form {
     border-radius: 7px;
     padding: 50px 64px;
     box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
@@ -210,7 +211,7 @@
     gap: 37px;
 }
 
-.themePage__Form > form .control-label{
+.themePage__Form > form .control-label {
     margin-bottom: 10px;
     font-family: "DM Sans", sans-serif;
     font-size: 18px;
@@ -218,12 +219,12 @@
     width: 372px;
 }
 
-.themePage__Form > form .form-control{
+.themePage__Form > form .form-control {
     border: 1px solid #2C1810;
     border-radius: 3px;
 }
 
-.themePage__Form__FileLabel{
+.themePage__Form__FileLabel {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -233,8 +234,8 @@
     display: none;
 }
 
-.themePage__Form__FileLabel > .themePage__Form__FileLabel__customFileInput{
-    display:flex;
+.themePage__Form__FileLabel > .themePage__Form__FileLabel__customFileInput {
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -245,13 +246,13 @@
     cursor: pointer;
 }
 
-.customFileInput__placeholder{
+.customFileInput__placeholder {
     font-family: "DM Sans", sans-serif;
     font-size: 16px;
     color: #929292;
 }
 
-.themePage__Form__submitContainer{
+.themePage__Form__submitContainer {
     display: flex;
     align-items: center;
     justify-content: center;

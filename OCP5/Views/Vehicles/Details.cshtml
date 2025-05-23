@@ -15,6 +15,13 @@
                 <figcaption></figcaption>
             </figure>
             <div class="themePage__detailsContainer__featuresContainer">
+                <div>
+                    <p>Vous avez publié cette annonce, vous pouvez le :</p>
+                    <ul>
+                        <li><a asp-action="Edit" asp-route-id="@Model.Id">Modifier</a></li>
+                        <li><a asp-action="Delete" asp-route-id="@Model.Id">Modifier</a></li>
+                    </ul>
+                </div>
                 <ul class="themePage__detailsContainer__featuresContainer__featuresList">
                     <li class="themePage__detailsContainer__featuresContainer__featuresList__item mainFeature">@Model.SellingPrice.ToString("C")</li>
                     <li class="themePage__detailsContainer__featuresContainer__featuresList__item">@Model.Year</li>
