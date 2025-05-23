@@ -8,7 +8,7 @@
     <h1 class="themeTitle">@ViewData["Title"]</h1>
     <p class="themeDescription">Tous les champs sont obligatoires</p>
     <div class="themePage__Form">
-        <form asp-action="Create" method="post">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label asp-for="SellingPrice" class="control-label"></label>
                 <input asp-for="SellingPrice" class="form-control" step="0.01"/>
