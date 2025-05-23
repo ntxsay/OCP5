@@ -10,6 +10,7 @@ public class Vehicle
     public string? VinCode { get; set; }
     public double PurchasePrice { get; set; }
     public double SellingPrice { get; set; }
+    public string? ImageFileName { get; set; }
     
     public Brand Brand { get; set; } = null!;
     public Model Model { get; set; } = null!;

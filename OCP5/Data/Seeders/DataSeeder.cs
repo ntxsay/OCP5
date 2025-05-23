@@ -117,6 +117,7 @@ internal class DataSeeder
                 w.Name == "LE" || w.Name == "Sport" || w.Name == "TCe" || w.Name == "XLT" ||
                 w.Name == "LX" || w.Name == "S" || w.Name == "SEL").ToArray();
             
+            
             var vehicles = new List<Vehicle>
             {
                 new()
@@ -130,6 +131,7 @@ internal class DataSeeder
                     VehicleYearId = years.Single(w => w.Year == 2019).Id,
                     VehicleYear = years.Single(w => w.Year == 2019),
                     VinCode = null,
+                    ImageFileName = "2019-Mazda-MX-5-Miata.jpg",
                     PurchasePrice = 1_800,
                     SellingPrice = 9_900,
                     Repairings = 
@@ -152,6 +154,7 @@ internal class DataSeeder
                     VehicleYearId = years.Single(w => w.Year == 2007).Id,
                     VehicleYear = years.Single(w => w.Year == 2007),
                     VinCode = null,
+                    ImageFileName = "jeep_liberty.jpg",
                     PurchasePrice = 4_500,
                     SellingPrice = 5_350,
                     Repairings = 
@@ -174,6 +177,7 @@ internal class DataSeeder
                     VehicleYearId = years.Single(w => w.Year == 2007).Id,
                     VehicleYear = years.Single(w => w.Year == 2007),
                     VinCode = null,
+                    ImageFileName = "renault_scenic.jpg",
                     PurchasePrice = 1_800,
                     SellingPrice = 2_990,
                     Repairings = 
@@ -196,6 +200,7 @@ internal class DataSeeder
                     VehicleYearId = years.Single(w => w.Year == 2017).Id,
                     VehicleYear = years.Single(w => w.Year == 2017),
                     VinCode = null,
+                    ImageFileName = "ford_explorer.jpg",
                     PurchasePrice = 24_350,
                     SellingPrice = 25_950,
                     Repairings = 
@@ -218,6 +223,7 @@ internal class DataSeeder
                     VehicleYearId = years.Single(w => w.Year == 2008).Id,
                     VehicleYear = years.Single(w => w.Year == 2008),
                     VinCode = null,
+                    ImageFileName = "honda_civic.jpg",
                     PurchasePrice = 4_000,
                     SellingPrice = 4_975,
                     Repairings = 
@@ -240,6 +246,7 @@ internal class DataSeeder
                     VehicleYearId = years.Single(w => w.Year == 2016).Id,
                     VehicleYear = years.Single(w => w.Year == 2016),
                     VinCode = null,
+                    ImageFileName = "2016_volkswagen_gti-s.webp",
                     PurchasePrice = 15_250,
                     SellingPrice = 16_190,
                     Repairings = 
@@ -262,6 +269,7 @@ internal class DataSeeder
                     VehicleYearId = years.Single(w => w.Year == 2013).Id,
                     VehicleYear = years.Single(w => w.Year == 2013),
                     VinCode = null,
+                    ImageFileName = "ford_edge.jpg",
                     PurchasePrice = 10_990,
                     SellingPrice = 12_440,
                     Repairings = 

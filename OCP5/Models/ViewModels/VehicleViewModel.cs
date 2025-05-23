@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace OCP5.Models.ViewModels;
@@ -34,8 +35,11 @@ public class VehicleViewModel
     public double SellingPrice { get; set; }
     
     [Display(Name = "Visuel")]
-    [FileExtensions(Extensions = ".jpg, .png, .jpeg", ErrorMessage = "Veuillez sélectionner un fichier image valide (jpg, png, jpeg).")]
+    //[FileExtensions(Extensions = "jpg, png, jpeg", ErrorMessage = "Veuillez sélectionner un fichier image valide (jpg, png, jpeg).")]
     public IFormFile? File { get; set; }
+    
+    [BindNever]
+    public string? ImageFileName { get; set; }
 
     public SelectList? Brands { get; set; }
     public SelectList? Models { get; set; }

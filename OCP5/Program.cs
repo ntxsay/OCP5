@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using OCP5.Data;
 using OCP5.Data.Seeders;
 using OCP5.Extensions;
+using OCP5.Services;
 using OCP5.Services.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,7 @@ builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddScoped<IModelRepository, ModelRepository>();
 builder.Services.AddScoped<IFinitionRepository, FinitionRepository>();
 builder.Services.AddScoped<IVehiclesRepository, VehiclesRepository>();
+builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 
 var app = builder.Build();
 

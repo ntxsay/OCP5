@@ -8,6 +8,8 @@ namespace OCP5.Services.Repositories;
 
 public interface IVehiclesRepository : IRepository<Vehicle>
 {
+    public Task<string?> GetImageFileNameAsync(int id);
+    public string? GetImageFileName(int id);
     public Task<VehicleThumbnailViewModel?> GetThumbnailAsync(int id);
     public VehicleThumbnailViewModel? GetThumbnail(int id);
     public Task<IEnumerable<VehicleThumbnailViewModel>> GetAllThumbnailAsync();
@@ -42,6 +44,22 @@ public class VehiclesRepository(ApplicationDbContext context, IYearRepository ye
             .Include(v => v.Model)
             .Include(v => v.VehicleYear)
             .Select(s => s.ConvertToThumbnailViewModel()).ToArray();
+    }
+    
+    public async Task<string?> GetImageFileNameAsync(int id)
+    {
+        var model = await Context.Vehicles.Where(v => v.Id == id)
+            .Select(v => v.ImageFileName)
+            .SingleOrDefaultAsync();
+        return model;
+    }
+    
+    public string? GetImageFileName(int id)
+    {
+        var model = Context.Vehicles.Where(v => v.Id == id)
+            .Select(v => v.ImageFileName)
+            .SingleOrDefault();
+        return model;
     }
     
     public async Task<VehicleThumbnailViewModel?> GetThumbnailAsync(int id)

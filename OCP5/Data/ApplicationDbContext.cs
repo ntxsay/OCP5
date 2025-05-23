@@ -115,6 +115,10 @@ namespace OCP5.Data
                 .HasMaxLength(255)
                 .IsRequired(false);
             modelBuilder.Entity<Vehicle>()
+                .Property(x => x.ImageFileName)
+                .HasMaxLength(255)
+                .IsRequired(false);
+            modelBuilder.Entity<Vehicle>()
                 .Property(x => x.PurchasePrice)
                 .HasDefaultValue(0d)
                 .IsRequired();

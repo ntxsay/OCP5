@@ -334,6 +334,10 @@ namespace OCP5.Data.Migrations
                     b.Property<int>("FinitionId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ImageFileName")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<int>("ModelId")
                         .HasColumnType("int");
 

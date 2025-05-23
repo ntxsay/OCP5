@@ -15,7 +15,7 @@ using OCP5.Services.Repositories;
 
 namespace OCP5.Controllers
 {
-    public class VehiclesController(IVehiclesRepository vehiculeRepository) : Controller
+    public class VehiclesController(IVehiclesRepository vehiculeRepository, IFileUploadService fileUploadService) : Controller
     {
         public async Task<IActionResult> Index()
         {
@@ -51,6 +51,13 @@ namespace OCP5.Controllers
             {
                 try
                 {
+                    if (viewModel.File != null)
+                    {
+                        var fileName = await fileUploadService.UploadFileAsync(viewModel.File, "Uploads");
+                        if (!string.IsNullOrEmpty(fileName) && !string.IsNullOrWhiteSpace(viewModel.File.FileName))
+                            viewModel.ImageFileName = fileName;
+                    }
+                    
                     await vehiculeRepository.SaveDataAsync(viewModel);
                 }
                 catch (Exception)
@@ -60,6 +67,7 @@ namespace OCP5.Controllers
                 return View("Published");
             }
 
+            viewModel = await vehiculeRepository.EmptyViewModelAsync();
             return View(viewModel);
         }
 
@@ -100,6 +108,17 @@ namespace OCP5.Controllers
                 
                 try
                 {
+                    var currentImageFileName = await vehiculeRepository.GetImageFileNameAsync(id);
+                    if (viewModel.File != null)
+                    {
+                        var fileName = await fileUploadService.UploadFileAsync(viewModel.File, "Uploads");
+                        if (!string.IsNullOrEmpty(fileName) && !string.IsNullOrWhiteSpace(viewModel.File.FileName))
+                            viewModel.ImageFileName = fileName;
+                        
+                        //Supprime l'ancienne image
+                        if (!string.IsNullOrEmpty(currentImageFileName) && !string.IsNullOrWhiteSpace(currentImageFileName))
+                            fileUploadService.DeleteFile("Uploads", currentImageFileName);
+                    }
                     await vehiculeRepository.UpdateDataAsync(viewModel);
                 }
                 catch (Exception)
@@ -109,6 +128,7 @@ namespace OCP5.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            viewModel = await vehiculeRepository.EmptyViewModelAsync();
             return View(viewModel);
         }
         
@@ -123,12 +143,24 @@ namespace OCP5.Controllers
             var model = await vehiculeRepository.GetByIdAsync(id.Value);
             if (model == null)
                 return NotFound();
+
+            //Supprime l'image
+            var currentImageFileName = model.ImageFileName;
+            if (!string.IsNullOrEmpty(currentImageFileName) && !string.IsNullOrWhiteSpace(currentImageFileName))
+                fileUploadService.DeleteFile("Uploads", currentImageFileName);
             
             var fullName = $"{model.VehicleYear.Year} {model.Brand.Name} {model.Model.Name} {model.Finition.Name}";
             
             await vehiculeRepository.RemoveDataAsync(model);
             
             return View("DeletedConfirmation", fullName);
+        }
+        
+        public async Task<FileResult?> GetImage(int id)
+        {
+            var vehicle = await vehiculeRepository.GetByIdAsync(id);
+            var file = fileUploadService.GetImage("Uploads", vehicle?.ImageFileName);
+            return file;
         }
     }
 }

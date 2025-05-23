@@ -17,6 +17,7 @@ public static class ViewModelModelConverterExtension
             VinCode = null,
             PurchasePrice = 0,
             SellingPrice = self.SellingPrice,
+            ImageFileName = self.ImageFileName,
         };
     }
 
@@ -30,6 +31,7 @@ public static class ViewModelModelConverterExtension
             FinitionId = self.FinitionId,
             VehicleYearId = self.VehicleYearId,
             SellingPrice = self.SellingPrice,
+            ImageFileName = self.ImageFileName,
         };
     }
     
