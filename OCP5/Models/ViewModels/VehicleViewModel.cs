@@ -9,7 +9,7 @@ public class VehicleViewModel
     public int Id { get; set; }
     
     [DisplayName("Marque")]
-    [Required(ErrorMessage = "Veuillez sélectionner un marque.")]
+    [Required(ErrorMessage = "Veuillez sélectionner une marque.")]
     public int BrandId { get; set; }
     
     [DisplayName("Modèle")]

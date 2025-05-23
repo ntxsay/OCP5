@@ -9,7 +9,7 @@
     <a asp-action="Create" class="themeButton">
         <span class="themeButton__text">+ Ajouter une voiture</span>
     </a>
-    <div class="themePage__dataList --flex-wrap-two-column">
+    <div class="themePage__dataList">
     @foreach (var item in Model)
     {
         @await Html.PartialAsync("Components/Thumbnail", item)

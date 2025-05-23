@@ -5,6 +5,25 @@
     justify-content: center;
     align-items: center;
 }
+
+.themeNav__textLogo{
+    font-family: "Libre Baskerville", serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: #2C1810;
+}
+
+.themeNav__item{
+    font-family: "Libre Baskerville", serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #2C1810;
+}
+
+.themeNav__item.selected {
+    font-weight: 700;
+}
+
 .themeTitle {
     font-family: "Libre Baskerville", serif;
     font-weight: 400;
@@ -13,16 +32,32 @@
     color: #796157;
 }
 
+.themeDescription {
+    font-family: "Libre Baskerville", serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: #2C1810;
+    text-align: center;
+}
+
 .themeButton {
     padding: 20px 23px;
     background-color: #D9A963;
     border-radius: 5px;
     text-decoration: none;
     border: none;
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    color: #2C1810;
 }
 
 .themeButton:hover {
     background-color: #B99056;
+    color: white;
 }
 
 .themeButton > .themeButton__text {
@@ -31,22 +66,103 @@
     font-weight: 400;
     font-style: normal;
     font-size: 16px;
-    color: black;
+    color: #2C1810;
 }
 
 .themeButton > .themeButton__text:hover {
     color: white;
 }
 
-.themePage__dataList{
-    
-    
+.themeAddButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: "DM Sans", sans-serif;
+    font-size: 38px;
+    height: 82px;
+    width: 82px;
+    border-radius: 10px;
+    border: 1px solid #D9A963;
+    background-color: #F2E3CE;
+    color: #D9A963;
 }
-.--flex-wrap-two-column {
+
+.themeAddButton:hover {
+    background-color: #B99056;
+    border: 1px solid #D9A963;
+    color: #F2E3CE;
+}
+
+.themePage__dataList{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 7px 36px;
     justify-content: center;
     align-items: center;
+}
+
+.themePage__Form{
+    border-radius: 7px;
+    padding: 50px 64px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.themePage__Form > form {
+    display: flex;
+    flex-direction: column;
+    gap: 37px;
+}
+
+.themePage__Form > form .control-label{
+    margin-bottom: 10px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 18px;
+    color: #2C1810;
+    width: 372px;
+}
+
+.themePage__Form > form .form-control{
+    border: 1px solid #2C1810;
+    border-radius: 3px;
+}
+
+.themePage__Form__FileLabel{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.themePage__Form__FileLabel > input {
+    display: none;
+}
+
+.themePage__Form__FileLabel > .themePage__Form__FileLabel__customFileInput{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 43px 0;
+    border: 1px solid #2C1810;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.customFileInput__placeholder{
+    font-family: "DM Sans", sans-serif;
+    font-size: 16px;
+    color: #929292;
+}
+
+.themePage__Form__submitContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
