@@ -6,18 +6,18 @@ namespace OCP5.Services;
 
 public interface IFileUploadService
 {
-    public Task<string?> UploadFileAsync(IFormFile? formFile, string folderName);
-    public FileResult? GetImage(string folderName, string? fileName);
+    public Task<string?> UploadFileAsync(IFormFile? formFile, string folderName, string[] contentTypes, long maxSize);
+    public FileResult? GetFile(string folderName, string? fileName);
     public void DeleteFile(string folderName, string fileName);
 }
 
 public class FileUploadService(IWebHostEnvironment environment, ILogger<IFileUploadService> logger) : IFileUploadService
 {
-    public async Task<string?> UploadFileAsync(IFormFile? formFile, string folderName)
+    public async Task<string?> UploadFileAsync(IFormFile? formFile, string folderName, string[] contentTypes, long maxSize)
     {
-        if (formFile is { Length: > 0 } && !string.IsNullOrEmpty(folderName) && !string.IsNullOrWhiteSpace(formFile.FileName))
+        if (formFile != null && formFile.Length > 0 && formFile.Length <= maxSize && !string.IsNullOrEmpty(folderName) && !string.IsNullOrWhiteSpace(formFile.FileName))
         {
-            if (formFile.ContentType is "image/png" or "image/jpeg" or "image/jpg" or "image/webp")
+            if (contentTypes.Contains(formFile.ContentType, StringComparer.OrdinalIgnoreCase))
             {
                 try
                 {
@@ -42,7 +42,7 @@ public class FileUploadService(IWebHostEnvironment environment, ILogger<IFileUpl
         return null;
     }
     
-    public FileResult? GetImage(string folderName, string? fileName)
+    public FileResult? GetFile(string folderName, string? fileName)
     {
         try
         {

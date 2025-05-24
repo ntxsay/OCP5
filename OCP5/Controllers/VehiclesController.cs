@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using OCP5.Data;
-using OCP5.Extensions;
-using OCP5.Models.Entities;
 using OCP5.Models.ViewModels;
 using OCP5.Services;
 using OCP5.Services.Repositories;
@@ -17,6 +8,18 @@ namespace OCP5.Controllers
 {
     public class VehiclesController(IVehiclesRepository vehiculeRepository, IFileUploadService fileUploadService) : Controller
     {
+        /// <summary>
+        /// Types de fichiers aautorisés pour un fichier à mettre en ligne
+        /// </summary>
+        private readonly string[] _autorizeContentTypes = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
+        
+        /// <summary>
+        /// Taille autorisée pour un fichier à mettre en ligne : environ 2Mb
+        /// </summary>
+        private const long MaxSizeAutorized = 2097152;
+        
+        private const string UploadsFolderName = "Uploads";
+        
         public async Task<IActionResult> Index()
         {
             var models = await vehiculeRepository.GetAllThumbnailAsync();
@@ -53,8 +56,8 @@ namespace OCP5.Controllers
                 {
                     if (viewModel.File != null)
                     {
-                        var fileName = await fileUploadService.UploadFileAsync(viewModel.File, "Uploads");
-                        if (!string.IsNullOrEmpty(fileName) && !string.IsNullOrWhiteSpace(viewModel.File.FileName))
+                        var fileName = await fileUploadService.UploadFileAsync(viewModel.File, UploadsFolderName, _autorizeContentTypes, MaxSizeAutorized);
+                        if (!string.IsNullOrEmpty(fileName) && !string.IsNullOrWhiteSpace(fileName))
                             viewModel.ImageFileName = fileName;
                     }
                     
@@ -105,14 +108,14 @@ namespace OCP5.Controllers
                 {
                     if (viewModel.File != null)
                     {
-                        var fileName = await fileUploadService.UploadFileAsync(viewModel.File, "Uploads");
-                        if (!string.IsNullOrEmpty(fileName) && !string.IsNullOrWhiteSpace(viewModel.File.FileName))
+                        var fileName = await fileUploadService.UploadFileAsync(viewModel.File, UploadsFolderName, _autorizeContentTypes, MaxSizeAutorized);
+                        if (!string.IsNullOrEmpty(fileName) && !string.IsNullOrWhiteSpace(fileName))
                             viewModel.ImageFileName = fileName;
                         
                         //Supprime l'ancienne image
                         var currentImageFileName = await vehiculeRepository.GetImageFileNameAsync(id);
                         if (!string.IsNullOrEmpty(currentImageFileName) && !string.IsNullOrWhiteSpace(currentImageFileName))
-                            fileUploadService.DeleteFile("Uploads", currentImageFileName);
+                            fileUploadService.DeleteFile(UploadsFolderName, currentImageFileName);
                     }
                     await vehiculeRepository.UpdateDataAsync(viewModel);
                 }
@@ -142,7 +145,7 @@ namespace OCP5.Controllers
             //Supprime l'image
             var currentImageFileName = model.ImageFileName;
             if (!string.IsNullOrEmpty(currentImageFileName) && !string.IsNullOrWhiteSpace(currentImageFileName))
-                fileUploadService.DeleteFile("Uploads", currentImageFileName);
+                fileUploadService.DeleteFile(UploadsFolderName, currentImageFileName);
             
             var fullName = $"{model.VehicleYear.Year} {model.Brand.Name} {model.Model.Name} {model.Finition.Name}";
             
@@ -153,9 +156,9 @@ namespace OCP5.Controllers
         
         [HttpGet]
         [ActionName("ImageByName")]
-        public FileResult? GetImage(string? fileName)
+        public FileResult? GetImageByName(string? fileName)
         {
-            var file = fileUploadService.GetImage("Uploads", fileName);
+            var file = fileUploadService.GetFile(UploadsFolderName, fileName);
             return file;
         }
     }

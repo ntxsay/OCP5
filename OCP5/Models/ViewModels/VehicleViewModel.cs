@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using OCP5.Attributes.Validation;
 
 namespace OCP5.Models.ViewModels;
 
@@ -26,6 +27,7 @@ public class VehicleViewModel
     
     [DisplayName("Année")]
     [Required (ErrorMessage = "Veuillez sélectionner une année.")]
+    [Range(1, int.MaxValue, ErrorMessage = "Veuillez sélectionner une année.")]
     public int VehicleYearId { get; set; }
     
     [DisplayName("Prix de vente")]
@@ -34,8 +36,8 @@ public class VehicleViewModel
     [Range(1, double.MaxValue, ErrorMessage = "Veuillez saisir un prix de vente valide.")]
     public double SellingPrice { get; set; }
     
-    [Display(Name = "Visuel")]
-    //[FileExtensions(Extensions = "jpg, png, jpeg", ErrorMessage = "Veuillez sélectionner un fichier image valide (jpg, png, jpeg).")]
+    [DisplayName("Visuel")]
+    [FileValidation(["image/png", "image/jpeg", "image/jpg", "image/webp"], 2097152, ErrorMessage = "Veuillez sélectionner un fichier image valide (jpg, png, jpeg ou webp).")]
     public IFormFile? File { get; set; }
     
     [BindNever]
@@ -44,6 +46,5 @@ public class VehicleViewModel
     public SelectList? Brands { get; set; }
     public SelectList? Models { get; set; }
     public SelectList? Finitions { get; set; }
-    
     public SelectList? VehicleYears { get; set; }
 }
