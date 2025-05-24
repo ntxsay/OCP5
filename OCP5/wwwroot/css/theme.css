@@ -64,7 +64,6 @@
     text-decoration: none;
     border: none;
     font-family: "DM Sans", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
     font-size: 16px;
@@ -78,7 +77,6 @@
 
 .themeButton > .themeButton__text {
     font-family: "DM Sans", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
     font-size: 16px;
@@ -304,6 +302,14 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.validation-summary-errors li {
+    width: 372px;
+}
+
+.validation-summary-errors li {
+    text-wrap: wrap;
 }
 
 /*Log in*/
