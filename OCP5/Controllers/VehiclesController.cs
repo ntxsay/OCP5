@@ -155,14 +155,6 @@ namespace OCP5.Controllers
             
             return View("DeletedConfirmation", fullName);
         }
-
-        [HttpGet]
-        public async Task<FileResult?> GetImage(int id)
-        {
-            var imageFileName = await vehiculeRepository.GetImageFileNameAsync(id);
-            var file = fileUploadService.GetImage("Uploads", imageFileName);
-            return file;
-        }
         
         [HttpGet]
         [ActionName("ImageByName")]
