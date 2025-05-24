@@ -4,8 +4,8 @@
     ViewData["Title"] = "Mettre à jour une voiture";
 }
 
-<div class="themePage themePage__with__paddingTop">
-    <h1 class="themeTitle">@ViewData["Title"]</h1>
+<section class="themePage themePage__with__paddingTop">
+    <h2 class="themeTitle">@ViewData["Title"]</h2>
     <p class="themeDescription">Tous les champs sont obligatoires</p>
     <div class="themePage__Form">
         <form asp-action="Edit" method="post"  enctype="multipart/form-data">
@@ -46,7 +46,7 @@
             </div>
         </form>
     </div>
-</div>
+</section>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -3,11 +3,11 @@
 @model OCP5.Models.ViewModels.VehicleThumbnailViewModel
 
 @{
-    ViewData["Title"] = "Details";
     var itemName = $"{Model.Year} {Model.BrandName} {Model.ModelName} {Model.FinitionName}";
+    ViewData["Title"] = itemName;
 }
 
-<div class="themePage themePage__with__paddingTop">
+<section class="themePage themePage__with__paddingTop">
     <div class="themePage__subPage">
         <div class="themePage__detailsNavigation">
             <a asp-action="Index">⟵ Retour</a>
@@ -44,4 +44,4 @@
             </div>
         </div>
     </div>
-</div>
+</section>

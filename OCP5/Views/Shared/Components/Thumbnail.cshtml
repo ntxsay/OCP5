@@ -2,7 +2,7 @@
 @{
     var itemName = $"{Model.Year} {Model.BrandName} {Model.ModelName} {Model.FinitionName}";
 }
-<div class="thumbnail">
+<article class="thumbnail">
     <figure>
         <img src="/Vehicles/ImageByName?fileName=@Model.ImageFileName" alt="@itemName"/>
         <figcaption></figcaption>
@@ -16,4 +16,4 @@
             <li class="thumbnailFeatures__feature">@Model.FinitionName</li>
         </ul>
     </div>
-</div>
+</article>
