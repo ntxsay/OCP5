@@ -94,11 +94,6 @@ namespace OCP5.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, VehicleViewModel viewModel)
         {
-            if (id != viewModel.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 if (!await vehiculeRepository.ExistsAsync(id))

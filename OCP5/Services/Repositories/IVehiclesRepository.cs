@@ -15,13 +15,18 @@ public interface IVehiclesRepository : IRepository<Vehicle>
     public Task<IEnumerable<VehicleThumbnailViewModel>> GetAllThumbnailAsync();
     public IEnumerable<VehicleThumbnailViewModel> GetAllThumbnail();
     public Task SaveDataAsync(VehicleViewModel viewModel);
-    public Task<VehicleViewModel?> GetViewModelByIdAsync(int id, bool addSelectList = true);
+    public Task<VehicleViewModel?> GetViewModelByIdAsync(int id);
     public void UpdateData(VehicleViewModel viewModel);
     public Task UpdateDataAsync(VehicleViewModel viewModel);
     public Task RemoveDataAsync(Vehicle entity);
     public Task RemoveDataAsync(int id);
     public void RemoveData(Vehicle entity);
     public Task<bool> ExistsAsync(int id);
+    
+    /// <summary>
+    /// Instancie un nouveau modèle de vue de véhicule
+    /// </summary>
+    /// <returns></returns>
     public Task<VehicleViewModel> EmptyViewModelAsync();
 }
 
@@ -87,20 +92,17 @@ public class VehiclesRepository(ApplicationDbContext context, IYearRepository ye
             .SingleOrDefaultAsync(s => s.Id == id);
     }
     
-    public async Task<VehicleViewModel?> GetViewModelByIdAsync(int id, bool addSelectList = true)
+    public async Task<VehicleViewModel?> GetViewModelByIdAsync(int id)
     {
         var model = await GetByIdAsync(id);
         if (model == null)
             return null;
         
         var viewModel = model.ConvertToViewModel();
-        if (addSelectList)
-        {
-            viewModel.Brands = await brandRepository.GetSelectListAsync();
-            viewModel.Models = await modelRepository.GetSelectListAsync();
-            viewModel.VehicleYears = await yearRepository.GetSelectListAsync();
-            viewModel.Finitions = await finitionRepository.GetSelectListAsync();
-        }
+        viewModel.Brands = await brandRepository.GetSelectListAsync();
+        viewModel.Models = await modelRepository.GetSelectListAsync();
+        viewModel.VehicleYears = await yearRepository.GetSelectListAsync();
+        viewModel.Finitions = await finitionRepository.GetSelectListAsync();
         
         return viewModel;
     }
