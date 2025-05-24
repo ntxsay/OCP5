@@ -57,6 +57,10 @@
     text-align: center;
 }
 
+.themeShadow {
+    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+}
+
 .themeButton {
     padding: 20px 23px;
     background-color: #D9A963;
@@ -243,7 +247,6 @@
 .themePage__Form {
     border-radius: 7px;
     padding: 50px 64px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
     display: flex;
     flex-direction: row;
     justify-content: center;
