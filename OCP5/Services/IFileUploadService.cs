@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 
 namespace OCP5.Services;
@@ -10,7 +11,7 @@ public interface IFileUploadService
     public void DeleteFile(string folderName, string fileName);
 }
 
-public class FileUploadService(IWebHostEnvironment environment) : IFileUploadService
+public class FileUploadService(IWebHostEnvironment environment, ILogger<IFileUploadService> logger) : IFileUploadService
 {
     public async Task<string?> UploadFileAsync(IFormFile? formFile, string folderName)
     {
@@ -41,7 +42,7 @@ public class FileUploadService(IWebHostEnvironment environment) : IFileUploadSer
         return null;
     }
     
-    public FileResult? GetImage(string folderName, string fileName)
+    public FileResult? GetImage(string folderName, string? fileName)
     {
         try
         {
@@ -50,10 +51,12 @@ public class FileUploadService(IWebHostEnvironment environment) : IFileUploadSer
             if (!Directory.Exists(directoryPath))
                 Directory.CreateDirectory(directoryPath);
             
+            var provider = new FileExtensionContentTypeProvider();
+
             var filePath = Path.Combine(directoryPath, defaultImageName);
-            if (string.IsNullOrEmpty(fileName) || string.IsNullOrWhiteSpace(fileName) || ! new FileExtensionContentTypeProvider().TryGetContentType(fileName, out var fileNameContentType))
+            if (string.IsNullOrEmpty(fileName) || string.IsNullOrWhiteSpace(fileName) || ! provider.TryGetContentType(fileName, out var fileNameContentType))
             {
-                if (File.Exists(filePath) && new FileExtensionContentTypeProvider().TryGetContentType(filePath, out var defaultImageContentType))
+                if (File.Exists(filePath) && provider.TryGetContentType(filePath, out var defaultImageContentType))
                     return new PhysicalFileResult(filePath, defaultImageContentType);
             }
             else
@@ -65,7 +68,7 @@ public class FileUploadService(IWebHostEnvironment environment) : IFileUploadSer
                 }
 
                 filePath = Path.Combine(directoryPath, defaultImageName);
-                if (File.Exists(filePath) && new FileExtensionContentTypeProvider().TryGetContentType(filePath, out var contentType1))
+                if (File.Exists(filePath) && provider.TryGetContentType(filePath, out var contentType1))
                 {
                     return new PhysicalFileResult(filePath, contentType1);
                 }
@@ -73,8 +76,9 @@ public class FileUploadService(IWebHostEnvironment environment) : IFileUploadSer
 
             return null;
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            logger.LogCritical(e.Message);
             return null;
         }
     }

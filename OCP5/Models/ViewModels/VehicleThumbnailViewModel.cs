@@ -8,4 +8,5 @@ public class VehicleThumbnailViewModel
     public string ModelName { get; set; } = string.Empty;
     public string FinitionName { get; set; } = string.Empty;
     public double SellingPrice { get; set; }
+    public string? ImageFileName { get; set; }
 }

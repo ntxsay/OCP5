@@ -108,7 +108,6 @@ namespace OCP5.Controllers
                 
                 try
                 {
-                    var currentImageFileName = await vehiculeRepository.GetImageFileNameAsync(id);
                     if (viewModel.File != null)
                     {
                         var fileName = await fileUploadService.UploadFileAsync(viewModel.File, "Uploads");
@@ -116,6 +115,7 @@ namespace OCP5.Controllers
                             viewModel.ImageFileName = fileName;
                         
                         //Supprime l'ancienne image
+                        var currentImageFileName = await vehiculeRepository.GetImageFileNameAsync(id);
                         if (!string.IsNullOrEmpty(currentImageFileName) && !string.IsNullOrWhiteSpace(currentImageFileName))
                             fileUploadService.DeleteFile("Uploads", currentImageFileName);
                     }
@@ -155,11 +155,20 @@ namespace OCP5.Controllers
             
             return View("DeletedConfirmation", fullName);
         }
-        
+
+        [HttpGet]
         public async Task<FileResult?> GetImage(int id)
         {
-            var vehicle = await vehiculeRepository.GetByIdAsync(id);
-            var file = fileUploadService.GetImage("Uploads", vehicle?.ImageFileName);
+            var imageFileName = await vehiculeRepository.GetImageFileNameAsync(id);
+            var file = fileUploadService.GetImage("Uploads", imageFileName);
+            return file;
+        }
+        
+        [HttpGet]
+        [ActionName("ImageByName")]
+        public FileResult? GetImage(string? fileName)
+        {
+            var file = fileUploadService.GetImage("Uploads", fileName);
             return file;
         }
     }

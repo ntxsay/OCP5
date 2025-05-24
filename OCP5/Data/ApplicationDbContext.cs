@@ -127,36 +127,24 @@ namespace OCP5.Data
                 .IsRequired();
             modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.Brand)
-                .WithOne(o => o.Vehicle)
-                .HasForeignKey<Vehicle>(f => f.BrandId)
+                .WithMany(m => m.Vehicles)
+                .HasForeignKey(f => f.BrandId)
                 .IsRequired();
-            modelBuilder.Entity<Vehicle>()
-                .HasIndex(o => o.BrandId)
-                .IsUnique(false);
             modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.Model)
-                .WithOne(o => o.Vehicle)
-                .HasForeignKey<Vehicle>(f => f.ModelId)
+                .WithMany(m => m.Vehicles)
+                .HasForeignKey(f => f.ModelId)
                 .IsRequired();
-            modelBuilder.Entity<Vehicle>()
-                .HasIndex(o => o.ModelId)
-                .IsUnique(false);
             modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.Finition)
-                .WithOne(o => o.Vehicle)
-                .HasForeignKey<Vehicle>(f => f.FinitionId)
+                .WithMany(m => m.Vehicles)
+                .HasForeignKey(f => f.FinitionId)
                 .IsRequired();
-            modelBuilder.Entity<Vehicle>()
-                .HasIndex(o => o.FinitionId)
-                .IsUnique(false);
             modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.VehicleYear)
-                .WithOne(o => o.Vehicle)
-                .HasForeignKey<Vehicle>(f => f.VehicleYearId)
+                .WithMany(m => m.Vehicles)
+                .HasForeignKey(f => f.VehicleYearId)
                 .IsRequired();
-            modelBuilder.Entity<Vehicle>()
-                .HasIndex(o => o.VehicleYearId)
-                .IsUnique(false);
             modelBuilder.Entity<Vehicle>()
                 .HasMany(m => m.Repairings)
                 .WithOne(o => o.Vehicle)

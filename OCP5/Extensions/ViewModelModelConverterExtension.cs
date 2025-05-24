@@ -45,6 +45,7 @@ public static class ViewModelModelConverterExtension
             FinitionName = self.Finition.Name,
             Year = self.VehicleYear.Year,
             SellingPrice = self.SellingPrice,
+            ImageFileName = self.ImageFileName,
         };
     }
 }

@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OCP5.Data;
 
 #nullable disable
 
-namespace OCP5.Data.Migrations
+namespace OCP5.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250524000206_FirstMigration")]
+    partial class FirstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -450,26 +453,26 @@ namespace OCP5.Data.Migrations
             modelBuilder.Entity("OCP5.Models.Entities.Vehicle", b =>
                 {
                     b.HasOne("OCP5.Models.Entities.Brand", "Brand")
-                        .WithOne("Vehicle")
-                        .HasForeignKey("OCP5.Models.Entities.Vehicle", "BrandId")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("OCP5.Models.Entities.Finition", "Finition")
-                        .WithOne("Vehicle")
-                        .HasForeignKey("OCP5.Models.Entities.Vehicle", "FinitionId")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("FinitionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("OCP5.Models.Entities.Model", "Model")
-                        .WithOne("Vehicle")
-                        .HasForeignKey("OCP5.Models.Entities.Vehicle", "ModelId")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("ModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("OCP5.Models.Entities.VehicleYear", "VehicleYear")
-                        .WithOne("Vehicle")
-                        .HasForeignKey("OCP5.Models.Entities.Vehicle", "VehicleYearId")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("VehicleYearId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -484,20 +487,17 @@ namespace OCP5.Data.Migrations
 
             modelBuilder.Entity("OCP5.Models.Entities.Brand", b =>
                 {
-                    b.Navigation("Vehicle")
-                        .IsRequired();
+                    b.Navigation("Vehicles");
                 });
 
             modelBuilder.Entity("OCP5.Models.Entities.Finition", b =>
                 {
-                    b.Navigation("Vehicle")
-                        .IsRequired();
+                    b.Navigation("Vehicles");
                 });
 
             modelBuilder.Entity("OCP5.Models.Entities.Model", b =>
                 {
-                    b.Navigation("Vehicle")
-                        .IsRequired();
+                    b.Navigation("Vehicles");
                 });
 
             modelBuilder.Entity("OCP5.Models.Entities.Vehicle", b =>
@@ -507,8 +507,7 @@ namespace OCP5.Data.Migrations
 
             modelBuilder.Entity("OCP5.Models.Entities.VehicleYear", b =>
                 {
-                    b.Navigation("Vehicle")
-                        .IsRequired();
+                    b.Navigation("Vehicles");
                 });
 #pragma warning restore 612, 618
         }

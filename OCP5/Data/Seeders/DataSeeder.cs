@@ -116,20 +116,15 @@ internal class DataSeeder
             var finitions = context.Finitions.Where(w =>
                 w.Name == "LE" || w.Name == "Sport" || w.Name == "TCe" || w.Name == "XLT" ||
                 w.Name == "LX" || w.Name == "S" || w.Name == "SEL").ToArray();
-            
-            
+
             var vehicles = new List<Vehicle>
             {
                 new()
                 {
                     BrandId = brands.Single(w => w.Name == "Mazda").Id,
-                    Brand = brands.Single(w => w.Name == "Mazda"),
                     ModelId = models.Single(w => w.Name == "Miata").Id,
-                    Model = models.Single(w => w.Name == "Miata"),
                     FinitionId = finitions.Single(w => w.Name == "LE").Id,
-                    Finition = finitions.Single(w => w.Name == "LE"),
                     VehicleYearId = years.Single(w => w.Year == 2019).Id,
-                    VehicleYear = years.Single(w => w.Year == 2019),
                     VinCode = null,
                     ImageFileName = "2019-Mazda-MX-5-Miata.jpg",
                     PurchasePrice = 1_800,
@@ -146,13 +141,9 @@ internal class DataSeeder
                 new()
                 {
                     BrandId = brands.Single(w => w.Name == "Jeep").Id,
-                    Brand = brands.Single(w => w.Name == "Jeep"),
                     ModelId = models.Single(w => w.Name == "Liberty").Id,
-                    Model = models.Single(w => w.Name == "Liberty"),
                     FinitionId = finitions.Single(w => w.Name == "Sport").Id,
-                    Finition = finitions.Single(w => w.Name == "Sport"),
                     VehicleYearId = years.Single(w => w.Year == 2007).Id,
-                    VehicleYear = years.Single(w => w.Year == 2007),
                     VinCode = null,
                     ImageFileName = "jeep_liberty.jpg",
                     PurchasePrice = 4_500,
@@ -169,13 +160,9 @@ internal class DataSeeder
                 new()
                 {
                     BrandId = brands.Single(w => w.Name == "Renault").Id,
-                    Brand = brands.Single(w => w.Name == "Renault"),
                     ModelId = models.Single(w => w.Name == "Scénic").Id,
-                    Model = models.Single(w => w.Name == "Scénic"),
                     FinitionId = finitions.Single(w => w.Name == "TCe").Id,
-                    Finition = finitions.Single(w => w.Name == "TCe"),
                     VehicleYearId = years.Single(w => w.Year == 2007).Id,
-                    VehicleYear = years.Single(w => w.Year == 2007),
                     VinCode = null,
                     ImageFileName = "renault_scenic.jpg",
                     PurchasePrice = 1_800,
@@ -192,13 +179,9 @@ internal class DataSeeder
                 new()
                 {
                     BrandId = brands.Single(w => w.Name == "Ford").Id,
-                    Brand = brands.Single(w => w.Name == "Ford"),
                     ModelId = models.Single(w => w.Name == "Explorer").Id,
-                    Model = models.Single(w => w.Name == "Explorer"),
                     FinitionId = finitions.Single(w => w.Name == "XLT").Id,
-                    Finition = finitions.Single(w => w.Name == "XLT"),
                     VehicleYearId = years.Single(w => w.Year == 2017).Id,
-                    VehicleYear = years.Single(w => w.Year == 2017),
                     VinCode = null,
                     ImageFileName = "ford_explorer.jpg",
                     PurchasePrice = 24_350,
@@ -215,13 +198,9 @@ internal class DataSeeder
                 new()
                 {
                     BrandId = brands.Single(w => w.Name == "Honda").Id,
-                    Brand = brands.Single(w => w.Name == "Honda"),
                     ModelId = models.Single(w => w.Name == "Civic").Id,
-                    Model = models.Single(w => w.Name == "Civic"),
                     FinitionId = finitions.Single(w => w.Name == "LX").Id,
-                    Finition = finitions.Single(w => w.Name == "LX"),
                     VehicleYearId = years.Single(w => w.Year == 2008).Id,
-                    VehicleYear = years.Single(w => w.Year == 2008),
                     VinCode = null,
                     ImageFileName = "honda_civic.jpg",
                     PurchasePrice = 4_000,
@@ -238,13 +217,9 @@ internal class DataSeeder
                 new()
                 {
                     BrandId = brands.Single(w => w.Name == "Volkswagen").Id,
-                    Brand = brands.Single(w => w.Name == "Volkswagen"),
                     ModelId = models.Single(w => w.Name == "GTI").Id,
-                    Model = models.Single(w => w.Name == "GTI"),
                     FinitionId = finitions.Single(w => w.Name == "S").Id,
-                    Finition = finitions.Single(w => w.Name == "S"),
                     VehicleYearId = years.Single(w => w.Year == 2016).Id,
-                    VehicleYear = years.Single(w => w.Year == 2016),
                     VinCode = null,
                     ImageFileName = "2016_volkswagen_gti-s.webp",
                     PurchasePrice = 15_250,
@@ -261,13 +236,9 @@ internal class DataSeeder
                 new()
                 {
                     BrandId = brands.Single(w => w.Name == "Ford").Id,
-                    Brand = brands.Single(w => w.Name == "Ford"),
                     ModelId = models.Single(w => w.Name == "Edge").Id,
-                    Model = models.Single(w => w.Name == "Edge"),
                     FinitionId = finitions.Single(w => w.Name == "SEL").Id,
-                    Finition = finitions.Single(w => w.Name == "SEL"),
                     VehicleYearId = years.Single(w => w.Year == 2013).Id,
-                    VehicleYear = years.Single(w => w.Year == 2013),
                     VinCode = null,
                     ImageFileName = "ford_edge.jpg",
                     PurchasePrice = 10_990,
