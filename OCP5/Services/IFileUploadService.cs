@@ -15,7 +15,7 @@ public class FileUploadService(IWebHostEnvironment environment, ILogger<IFileUpl
 {
     public async Task<string?> UploadFileAsync(IFormFile? formFile, string folderName, string[] contentTypes, long maxSize)
     {
-        if (formFile != null && formFile.Length > 0 && formFile.Length <= maxSize && !string.IsNullOrEmpty(folderName) && !string.IsNullOrWhiteSpace(formFile.FileName))
+        if (formFile != null && formFile.Length > 0 && formFile.Length <= maxSize && !string.IsNullOrEmpty(folderName) && !string.IsNullOrWhiteSpace(folderName))
         {
             if (contentTypes.Contains(formFile.ContentType, StringComparer.OrdinalIgnoreCase))
             {
@@ -32,8 +32,9 @@ public class FileUploadService(IWebHostEnvironment environment, ILogger<IFileUpl
                     await formFile.CopyToAsync(stream);
                     return Path.GetFileName(filePath);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    logger.LogError(e.Message);
                     return null;
                 }
             }
@@ -78,7 +79,7 @@ public class FileUploadService(IWebHostEnvironment environment, ILogger<IFileUpl
         }
         catch (Exception e)
         {
-            logger.LogCritical(e.Message);
+            logger.LogError(e.Message);
             return null;
         }
     }
