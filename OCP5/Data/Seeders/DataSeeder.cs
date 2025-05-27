@@ -23,8 +23,7 @@ internal class DataSeeder
         //Ajout des années des véhicules
         if (!context.VehicleYears.Any())
         {
-            HashSet<int> values = [2019, 2007, 2017, 2008, 2016, 2013];
-            context.VehicleYears.AddRange(values.Select(s => new VehicleYear
+            context.VehicleYears.AddRange(Enumerable.Range(1990, 45).Select(s => new VehicleYear
             {
                 Year = s
             }));
