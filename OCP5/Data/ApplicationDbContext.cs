@@ -78,6 +78,11 @@ namespace OCP5.Data
                 .Property(x => x.Name)                
                 .HasMaxLength(255)
                 .IsRequired();
+            modelBuilder.Entity<Model>()
+                .HasOne(x => x.Brand)
+                .WithMany(x => x.Models)
+                .HasForeignKey(s => s.IdBrand)
+                .IsRequired();
 
             //Finition
             modelBuilder.Entity<Finition>()
@@ -134,6 +139,7 @@ namespace OCP5.Data
                 .HasOne(o => o.Model)
                 .WithMany(m => m.Vehicles)
                 .HasForeignKey(f => f.ModelId)
+                .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
             modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.Finition)

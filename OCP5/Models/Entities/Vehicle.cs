@@ -1,4 +1,6 @@
-﻿namespace OCP5.Models.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace OCP5.Models.Entities;
 
 public class Vehicle
 {

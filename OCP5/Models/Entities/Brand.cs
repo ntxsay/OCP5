@@ -6,4 +6,5 @@ public class Brand
     public string Name { get; set; } = string.Empty;
 
     public virtual List<Vehicle> Vehicles { get; set; } = [];
+    public virtual List<Model> Models { get; set; } = [];
 }

@@ -22,6 +22,7 @@ public interface IVehiclesRepository : IRepository<Vehicle>
     public Task RemoveDataAsync(int id);
     public void RemoveData(Vehicle entity);
     public Task<bool> ExistsAsync(int id);
+    public Task<Dictionary<int, string>> GetModelsAsync(int brandId);
     
     /// <summary>
     /// Instancie un nouveau modèle de vue de véhicule
@@ -193,5 +194,10 @@ public class VehiclesRepository(ApplicationDbContext context, IYearRepository ye
     public async Task<bool> ExistsAsync(int id)
     {
         return await Context.Vehicles.AnyAsync(v => v.Id == id);
+    }
+
+    public async Task<Dictionary<int, string>> GetModelsAsync(int brandId)
+    {
+        return await brandRepository.GetModelsAsync(brandId);
     }
 }

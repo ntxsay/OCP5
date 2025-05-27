@@ -161,5 +161,17 @@ namespace OCP5.Controllers
             var file = fileUploadService.GetFile(UploadsFolderName, fileName);
             return file;
         }
+        
+        [HttpGet]
+        [ActionName("Models")]
+        public async Task<JsonResult> GetModelsAsync(int id)
+        {
+            var file = await vehiculeRepository.GetModelsAsync(id);
+            return Json(file.Select(s => new
+            {
+                Id = s.Key,
+                Value = s.Value
+            }));
+        }
     }
 }

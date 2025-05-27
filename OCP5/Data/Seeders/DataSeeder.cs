@@ -31,42 +31,86 @@ internal class DataSeeder
             context.SaveChanges();
         }
 
-        //Ajout des marques de véhicules
+        //Ajout des marques et modeles de véhicules
         if (!context.Brands.Any())
         {
-            var values = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            var mazda = new Brand
             {
-                "Mazda",
-                "Jeep",
-                "Renault",
-                "Ford",
-                "Honda",
-                "Volkswagen",
+                Name = "Mazda",
+                Models =
+                [
+                    new Model
+                    {
+                        Name = "Miata",
+                    }
+                ]
             };
-            context.Brands.AddRange(values.Select(s => new Brand
+
+            var jeep = new Brand
             {
-                Name = s
-            }));
-            context.SaveChanges();
-        }
-        
-        //Ajout des modeles de véhicules
-        if (!context.Models.Any())
-        {
-            var values = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-            {
-                "Miata",
-                "Liberty",
-                "Scénic",
-                "Explorer",
-                "Civic",
-                "GTI",
-                "Edge",
+                Name = "Jeep",
+                Models =
+                [
+                    new Model
+                    {
+                        Name = "Liberty",
+                    }
+                ]
             };
-            context.Models.AddRange(values.Select(s => new Model
+
+            var renault = new Brand()
             {
-                Name = s
-            }));
+                Name = "Renault",
+                Models =
+                [
+                    new Model
+                    {
+                        Name = "Scénic"
+                    }
+                ]
+            };
+
+            var ford = new Brand()
+            {
+                Name = "Ford",
+                Models =
+                [
+                    new Model
+                    {
+                        Name = "Explorer",
+                    },
+                    new Model
+                    {
+                        Name = "Edge"
+                    }
+                ]
+            };
+
+            var honda = new Brand()
+            {
+                Name = "Honda",
+                Models =
+                [
+                    new Model
+                    {
+                        Name = "Civic"
+                    }
+                ]
+            };
+
+            var volkswagen = new Brand()
+            {
+                Name = "Volkswagen",
+                Models =
+                [
+                    new Model
+                    {
+                        Name = "GTI"
+                    }
+                ]
+            };
+            
+            context.Brands.AddRange(mazda, jeep, renault, ford, honda, volkswagen);
             context.SaveChanges();
         }
         
