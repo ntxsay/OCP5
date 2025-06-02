@@ -4,21 +4,30 @@ namespace OCP5.Data.Seeders;
 
 public static class IdentityDataSeeder
 {
-    private const string AdminRole = "Admin";
-    private const string AdminUser = "admin@express-voitures.fr";
-    private const string AdminPassword = "P@ssword123";
-    private const string NonAdminUser = "user1@testapp.fr";
-    private const string NonAdminPassword = "P@ssword567";
-
-    public static async Task EnsurePopulated(IApplicationBuilder app)
+    public static async Task EnsurePopulated(IApplicationBuilder app, IConfiguration config)
     {
+        var adminRole = config.GetSection("UserIds:AdminRole").Value;
+        var adminUserName = config.GetSection("UserIds:AdminUser").Value;
+        var adminPassword = config.GetSection("UserIds:AdminPassword").Value;
+        var nonAdminUserName = config.GetSection("UserIds:NonAdminUser").Value;
+        var nonAdminPassword = config.GetSection("UserIds:NonAdminPassword").Value;
+        
+        if (string.IsNullOrEmpty(adminUserName) || string.IsNullOrWhiteSpace(adminUserName) ||
+            string.IsNullOrEmpty(adminPassword) || string.IsNullOrWhiteSpace(adminPassword) ||
+            string.IsNullOrEmpty(nonAdminUserName) || string.IsNullOrWhiteSpace(nonAdminUserName) ||
+            string.IsNullOrEmpty(nonAdminPassword) || string.IsNullOrWhiteSpace(nonAdminPassword) ||
+            string.IsNullOrEmpty(adminRole) || string.IsNullOrWhiteSpace(adminRole))
+        {
+            return;
+        }
+        
         using var scope = app.ApplicationServices.CreateScope();
         var roleManager = (RoleManager<IdentityRole>)scope.ServiceProvider.GetRequiredService(typeof(RoleManager<IdentityRole>));
-        var role = await roleManager.FindByNameAsync(AdminRole);
+        var role = await roleManager.FindByNameAsync(adminRole);
         var isRoleAvailable = true;
         if (role == null)
         {
-            role = new IdentityRole(AdminRole);
+            role = new IdentityRole(adminRole);
             var roleCreationResult = await roleManager.CreateAsync(role); 
             isRoleAvailable = roleCreationResult.Succeeded;
         }
@@ -27,34 +36,34 @@ public static class IdentityDataSeeder
         {
             var userManager = (UserManager<IdentityUser>)scope.ServiceProvider.GetRequiredService(typeof(UserManager<IdentityUser>));
        
-            await userManager.FindByEmailAsync(AdminUser);
-            var adminUser = await userManager.FindByIdAsync(AdminUser);
+            await userManager.FindByEmailAsync(adminUserName);
+            var adminUser = await userManager.FindByIdAsync(adminUserName);
             if (adminUser == null)
             {
-                adminUser = new IdentityUser(AdminUser)
+                adminUser = new IdentityUser(adminUserName)
                 {
-                    Email = AdminUser,
-                    UserName = AdminUser,
+                    Email = adminUserName,
+                    UserName = adminUserName,
                     EmailConfirmed = true
                 };
             
-                var adminUserResult = await userManager.CreateAsync(adminUser, AdminPassword);
+                var adminUserResult = await userManager.CreateAsync(adminUser, adminPassword);
                 if (adminUserResult.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(adminUser, AdminRole);
+                    await userManager.AddToRoleAsync(adminUser, adminRole);
                 }
             }
         
-            var nonAdminUser = await userManager.FindByIdAsync(NonAdminUser);
+            var nonAdminUser = await userManager.FindByIdAsync(nonAdminUserName);
             if (nonAdminUser == null)
             {
-                nonAdminUser = new IdentityUser(NonAdminUser)
+                nonAdminUser = new IdentityUser(nonAdminUserName)
                 {
-                    Email = NonAdminUser,
-                    UserName = NonAdminUser,
+                    Email = nonAdminUserName,
+                    UserName = nonAdminUserName,
                     EmailConfirmed = true
                 };
-                await userManager.CreateAsync(nonAdminUser, NonAdminPassword);
+                await userManager.CreateAsync(nonAdminUser, nonAdminPassword);
             }
         }
     }
