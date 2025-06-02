@@ -156,6 +156,8 @@ namespace OCP5.Data
                 .HasForeignKey(f => f.BrandId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
+            
+            //DeleteBehavior.NoAction car : ...peut provoquer des cycles ou des accès en cascade multiples entre Brand <-> Model <-> Vehicle
             modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.Model)
                 .WithMany(m => m.Vehicles)
