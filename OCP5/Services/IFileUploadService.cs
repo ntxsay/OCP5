@@ -143,25 +143,43 @@ public class FileUploadService(IWebHostEnvironment environment, ILogger<IFileUpl
 
     public void DeleteFile(string folderName, string fileName)
     {
-        if (!string.IsNullOrEmpty(fileName) && !string.IsNullOrWhiteSpace(fileName) &&
-            !fileName.Equals(DefaultImageName, StringComparison.OrdinalIgnoreCase))
+        if (!string.IsNullOrEmpty(fileName) && !string.IsNullOrWhiteSpace(fileName))
         {
-            var directoryPath = Path.Combine(environment.ContentRootPath, folderName);
-            if (Directory.Exists(directoryPath))
+            if (!fileName.Equals(DefaultImageName, StringComparison.OrdinalIgnoreCase))
             {
-                var filePath = Path.Combine(directoryPath, fileName);
-                if (File.Exists(filePath))
+                var directoryPath = Path.Combine(environment.ContentRootPath, folderName);
+                if (Directory.Exists(directoryPath))
                 {
-                    try
+                    var filePath = Path.Combine(directoryPath, fileName);
+                    if (File.Exists(filePath))
                     {
-                        File.Delete(filePath);
+                        try
+                        {
+                            File.Delete(filePath);
+                        }
+                        catch (Exception e)
+                        {
+                            logger.LogError(e.Message);
+                        }
                     }
-                    catch (Exception e)
+                    else
                     {
-                        logger.LogError(e.Message);
+                        logger.LogWarning("Le fichier {fileName} n'existe pas dans le dossier {folderName}.", fileName, folderName);
                     }
                 }
+                else
+                {
+                    logger.LogWarning("Le dossier {folderName} n'existe pas.", folderName);
+                }
             }
+            else
+            {
+                logger.LogWarning("L'image par défaut et ne peut pas être supprimé.");
+            }
+        }
+        else
+        {
+            logger.LogWarning("Le nom du fichier à supprimer n'est pas renseigné.");
         }
     }
 }
