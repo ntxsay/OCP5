@@ -42,27 +42,37 @@ namespace OCP5.Data
                 .HasKey(x => x.Id);
             modelBuilder.Entity<PriceMargin>()
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd();
+                .ValueGeneratedOnAdd()
+                .IsRequired();
             modelBuilder.Entity<PriceMargin>()
                 .Property(x => x.Price)
                 .IsRequired();
+            modelBuilder.Entity<PriceMargin>()
+                .HasIndex(x => x.Price)
+                .IsUnique();
 
             //Année véhicules
             modelBuilder.Entity<VehicleYear>()
                 .HasKey(x => x.Id);
             modelBuilder.Entity<VehicleYear>()
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd();
+                .ValueGeneratedOnAdd()
+                .IsRequired();
             modelBuilder.Entity<VehicleYear>()
                 .Property(x => x.Year)
                 .IsRequired();
+            modelBuilder.Entity<VehicleYear>()
+                .HasIndex(x => x.Year)
+                .IsUnique();
+
 
             //Model
             modelBuilder.Entity<Model>()
                 .HasKey(x => x.Id);
             modelBuilder.Entity<Model>()
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd();
+                .ValueGeneratedOnAdd()
+                .IsRequired();
             modelBuilder.Entity<Model>()
                 .Property(x => x.Name)                
                 .HasMaxLength(255)
@@ -80,6 +90,9 @@ namespace OCP5.Data
                 .HasMaxLength(255)
                 .IsRequired();
             modelBuilder.Entity<Brand>()
+                .HasIndex(x => x.Name)
+                .IsUnique();
+            modelBuilder.Entity<Brand>()
                 .HasMany(x => x.Models)
                 .WithOne(x => x.Brand)
                 .HasForeignKey(s => s.IdBrand)
@@ -91,18 +104,23 @@ namespace OCP5.Data
                 .HasKey(x => x.Id);
             modelBuilder.Entity<Finition>()
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd();
+                .ValueGeneratedOnAdd()
+                .IsRequired();
             modelBuilder.Entity<Finition>()
                 .Property(x => x.Name)
                 .HasMaxLength(255)
                 .IsRequired();
+            modelBuilder.Entity<Finition>()
+                .HasIndex(x => x.Name)
+                .IsUnique();
 
             //Reparations
             modelBuilder.Entity<Repairing>()
                 .HasKey(x => x.Id);
             modelBuilder.Entity<Repairing>()
                 .Property(x => x.Id)
-                .ValueGeneratedOnAdd();
+                .ValueGeneratedOnAdd()
+                .IsRequired();
             modelBuilder.Entity<Repairing>()
                 .Property(x => x.Name)
                 .HasMaxLength(255)
@@ -148,16 +166,19 @@ namespace OCP5.Data
                 .HasOne(o => o.Finition)
                 .WithMany(m => m.Vehicles)
                 .HasForeignKey(f => f.FinitionId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
             modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.VehicleYear)
                 .WithMany(m => m.Vehicles)
                 .HasForeignKey(f => f.VehicleYearId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
             modelBuilder.Entity<Vehicle>()
                 .HasMany(m => m.Repairings)
                 .WithOne(o => o.Vehicle)
                 .HasForeignKey(f => f.IdVehicle)
+                .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
         }
     }
