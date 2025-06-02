@@ -3,26 +3,26 @@ Dépôt du projet 5 du parcours Développeur Back-End .NET.
 
 Ce projet possède une base de données intégrée qui sera créée lorsque l’application sera exécutée pour la première fois. Pour la créer correctement, vous devez satisfaire aux prérequis ci-dessous et mettre à jour les chaînes de connexion pour qu’elles pointent vers le serveur MSSQL qui est exécuté sur votre PC en local.
 
-**Prérequis** : 
+## Prérequis : 
 - Système de gestion de base de données relationnelle : **Microsoft SQL Server 2022 Express** *(MSSQL Server Express 2022)*
 - Outils d'administration de base de données : **Microsoft SQL Server Management Studio** *(SSMS)*
 
-**Téléchargements** :
+## Téléchargements :
 
 MSSQL : https://www.microsoft.com/fr-fr/sql-server/sql-server-downloads
 
 SSMS : https://learn.microsoft.com/fr-fr/ssms/install/install
 
-**Remarques** : 
+## Remarques : 
 
 - MSSQL Server n'est disponible que pour **Windows** et les systèmes d'exploitations basés sur **LINUX tels qu'Ubuntu, Fedora, etc**. Si vous utilisez un système d'exploitation non compatible, vous devrez utiliser un conteneur Docker avec MSSQL Server ou exécuter une machine virtuelle Windows.
 - Le type d’authentification est « **Authentification Windows** »
 - Les versions antérieures de MSSQL Server devraient fonctionner sans problème, mais elles n’ont pas été testées.
 - Si SSMS n'est pas disponible sur votre machine ou si vous le souhaitez, vous pouvez utiliser un autre outil d'administration de base de données, tel que DBeaver, le plug-in MSSQL sur Visual Studio Code, le plug-in Database sur les IDE JetBrains ou un autre outil de votre choix. Cependant, il est recommandé d'utiliser SSMS pour ce projet, car il peut être plus facile à utiliser.
 
-**Attention** :
+## Attention :
 
-- MSSQL Server est la base de données utilisée dans ce projet. Si vous utilisez un autre système de gestion de base de données relationnelle, tel que MySQL, PostgreSQL ou SQLite, vous devrez adapter le code pour qu'il fonctionne avec ce système. Cela peut nécessiter des modifications importantes du code et des dépendances.
+- MSSQL Server est la base de données utilisée dans ce projet. Si vous utilisez un autre système de gestion de base de données relationnelle, tel que MySQL, PostgreSQL ou SQLite, vous devrez sans doute adapter le code pour qu'il fonctionne avec ce système. Cela peut nécessiter des modifications importantes du code et des dépendances.
 - La chaîne de connexion définie dans le projet est configurée pour MSSQL Server Express 2022, il se peut donc que vous deviez l'adapter si vous utilisez une autre version, édition de MSSQL Server ou en fonction des modifications apportées à votre instance lors de son installation.
 - Si vous avez des difficultés à vous connecter, essayez d’abord de vous connecter à l’aide de Microsoft SQL Server Management Studio (assurez-vous que le type d’authentification est « Authentification Windows »), ou consultez le site https://doc.milestonesys.com/latest/en-US/system/failover/management_server/fms_sqlserverinstancename.htm#:~:text=Open%20the%20Start%20menu%2C%20and,SQL%20Server%20%5BDisplay%20name%5D *(En anglais, pour Windows seulement)*.
 
@@ -36,3 +36,26 @@ Vous avez la section ConnectionStrings qui définit la chaîne de connexion pour
       }
 
 **DefaultConnection** - chaîne de connexion à la base de données de l’application.
+
+## Initier la base de données
+
+
+Ouvrir le terminal ou l'invite de commande au dossier du projet, tapez et exécutez les commandes suivantes pour initialiser la base de données :
+   
+  ```bash
+   dotnet ef migrations add InitialCreate
+   dotnet ef database update
+   ```
+
+Pour plus d'informations liées à ces commandes, consultez : https://learn.microsoft.com/fr-fr/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli#create-your-first-migration
+
+## Identifiants de connexion
+Pour vous connecter à l'application, utilisez les identifiants **fictifs** suivants :
+- Utilisateur Administrateur :
+  - Email : **admin@express-voitures.fr**
+  - Mot de passe : **P@ssword123**
+- Utilisateur Client :
+  - Email : **user1@testapp.fr**
+  - Mot de passe : **P@ssword567**
+
+Ces identifiants sont créés par défaut lors de l'initialisation de la base de données et consultable dans le fichier `appsettings.json`.
