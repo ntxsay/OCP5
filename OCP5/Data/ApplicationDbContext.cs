@@ -57,17 +57,6 @@ namespace OCP5.Data
                 .Property(x => x.Year)
                 .IsRequired();
 
-            //Brand
-            modelBuilder.Entity<Brand>()
-                .HasKey(x => x.Id);
-            modelBuilder.Entity<Brand>()
-                .Property(x => x.Id)
-                .ValueGeneratedOnAdd();
-            modelBuilder.Entity<Brand>()
-                .Property(x => x.Name)
-                .HasMaxLength(255)
-                .IsRequired();
-
             //Model
             modelBuilder.Entity<Model>()
                 .HasKey(x => x.Id);
@@ -78,10 +67,23 @@ namespace OCP5.Data
                 .Property(x => x.Name)                
                 .HasMaxLength(255)
                 .IsRequired();
-            modelBuilder.Entity<Model>()
-                .HasOne(x => x.Brand)
-                .WithMany(x => x.Models)
+            
+            //Brand
+            modelBuilder.Entity<Brand>()
+                .HasKey(x => x.Id);
+            modelBuilder.Entity<Brand>()
+                .Property(x => x.Id)
+                .ValueGeneratedOnAdd()
+                .IsRequired();
+            modelBuilder.Entity<Brand>()
+                .Property(x => x.Name)
+                .HasMaxLength(255)
+                .IsRequired();
+            modelBuilder.Entity<Brand>()
+                .HasMany(x => x.Models)
+                .WithOne(x => x.Brand)
                 .HasForeignKey(s => s.IdBrand)
+                .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
             //Finition
