@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using OCP5.Data;
 using OCP5.Extensions;
 using OCP5.Models.Entities;
@@ -101,7 +102,10 @@ public class VehiclesRepository(ApplicationDbContext context, IYearRepository ye
         
         var viewModel = model.ConvertToViewModel();
         viewModel.Brands = await brandRepository.GetSelectListAsync();
-        viewModel.Models = await modelRepository.GetSelectListAsync();
+        viewModel.Models = viewModel.Brands.Any()
+            ? await modelRepository.GetSelectListAsync(Convert.ToInt32(viewModel.Brands.First().Value))
+            : new SelectList(Enumerable.Empty<SelectListItem>());
+
         viewModel.VehicleYears = await yearRepository.GetSelectListAsync();
         viewModel.Finitions = await finitionRepository.GetSelectListAsync();
         
@@ -111,7 +115,9 @@ public class VehiclesRepository(ApplicationDbContext context, IYearRepository ye
     public async Task<VehicleViewModel> EmptyViewModelAsync()
     {
         var brands = await brandRepository.GetSelectListAsync();
-        var models = await modelRepository.GetSelectListAsync();
+        var models = brands.Any()
+            ? await modelRepository.GetSelectListAsync(Convert.ToInt32(brands.First().Value))
+            : new SelectList(Enumerable.Empty<SelectListItem>());
         var years = await yearRepository.GetSelectListAsync();
         var finitions = await finitionRepository.GetSelectListAsync();
         var viewModel = new VehicleViewModel()
