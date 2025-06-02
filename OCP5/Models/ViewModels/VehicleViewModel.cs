@@ -40,8 +40,7 @@ public class VehicleViewModel
     [FileValidation(["image/png", "image/jpeg", "image/jpg", "image/webp"], 2097152, ErrorMessage = "Veuillez sélectionner un fichier image valide (jpg, png, jpeg ou webp).")]
     public IFormFile? File { get; set; }
     
-    [BindNever]
-    public string? ImageFileName { get; set; }
+    public string? ImageFileName { get; set; } = "Ajoutez une image";
 
     public SelectList? Brands { get; set; }
     public SelectList? Models { get; set; }

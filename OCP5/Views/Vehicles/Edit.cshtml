@@ -35,10 +35,11 @@
                     <span>@Html.DisplayNameFor(m => m.File)</span>
                     <div class="themePage__Form__FileLabel__customFileInput">
                         <span class="themeAddButton">+</span>
-                        <span class="customFileInput__placeholder">Ajoutez une image</span>
+                        <span id="fileDisplayName" class="customFileInput__placeholder">@Model.ImageFileName</span>
                     </div>
                     <input asp-for="File" class ="form-control" accept=".jpg,.jpeg,.png,.webp"></input>
-                </label>
+                    <input id="fileDisplayNameHideInput"  type="hidden" asp-for="ImageFileName" />
+                    </label>
             </div>
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group themePage__Form__submitContainer">
