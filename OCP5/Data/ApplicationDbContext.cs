@@ -134,6 +134,7 @@ namespace OCP5.Data
                 .HasOne(o => o.Brand)
                 .WithMany(m => m.Vehicles)
                 .HasForeignKey(f => f.BrandId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
             modelBuilder.Entity<Vehicle>()
                 .HasOne(o => o.Model)

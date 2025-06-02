@@ -60,5 +60,5 @@ app.MapControllerRoute(
 app.MapRazorPages()
    .WithStaticAssets();
 
-await IdentityDataSeeder.EnsurePopulated(app);
+await IdentityDataSeeder.EnsurePopulated(app, app.Configuration);
 app.Run();
