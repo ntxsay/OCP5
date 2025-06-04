@@ -6,7 +6,7 @@ using OCP5.Services.Repositories;
 
 namespace OCP5.Controllers
 {
-    public class VehiclesController(IVehiclesRepository vehiculeRepository, IFileUploadService fileUploadService) : Controller
+    public class VehiclesController(IVehiclesRepository vehiculeRepository, IFileUploadService fileUploadService, ILogger<VehiclesController> logger) : Controller
     {
         /// <summary>
         /// Types de fichiers aautorisés pour un fichier à mettre en ligne
@@ -29,11 +29,17 @@ namespace OCP5.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
+            {
+                logger.LogWarning("L'ID du véhicule n'est pas valide.");
                 return NotFound();
+            }
 
             var vehicle = await vehiculeRepository.GetThumbnailAsync(id.Value);
             if (vehicle == null)
+            {
+                logger.LogWarning("Le véhicule avec l'ID {Id} n'a pas été trouvé.", id);
                 return NotFound();
+            }
 
             return View(vehicle);
         }
@@ -63,8 +69,9 @@ namespace OCP5.Controllers
                     
                     await vehiculeRepository.SaveDataAsync(viewModel);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    logger.LogError(e, "Une erreur s'est produite lors de la création du véhicule.");
                     return NotFound();
                 }
                 return View("Published");
@@ -80,12 +87,14 @@ namespace OCP5.Controllers
         {
             if (id == null)
             {
+                logger.LogWarning("L'ID du véhicule à éditer n'est pas valide.");
                 return NotFound();
             }
 
             var viewModel = await vehiculeRepository.GetViewModelByIdAsync(id.Value);
             if (viewModel == null)
             {
+                logger.LogWarning("Le véhicule avec l'ID {Id} n'a pas été trouvé pour l'édition.", id);
                 return NotFound();
             }
 
@@ -101,6 +110,7 @@ namespace OCP5.Controllers
             {
                 if (!await vehiculeRepository.ExistsAsync(id))
                 {
+                    logger.LogWarning("Le véhicule avec l'ID {Id} n'existe pas.", id);
                     return NotFound();
                 }
                 
@@ -119,8 +129,9 @@ namespace OCP5.Controllers
                     }
                     await vehiculeRepository.UpdateDataAsync(viewModel);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    logger.LogError(e, "Une erreur s'est produite lors de la mise à jour du véhicule avec l'ID {Id}.", id);
                    return NotFound();
                 }
                 return RedirectToAction(nameof(Index));
@@ -136,11 +147,17 @@ namespace OCP5.Controllers
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
+            {
+                logger.LogWarning("L'ID du véhicule à supprimer n'est pas valide.");
                 return NotFound();
+            }
 
             var model = await vehiculeRepository.GetByIdAsync(id.Value);
             if (model == null)
+            {
+                logger.LogWarning("Le véhicule avec l'ID {Id} n'a pas été trouvé pour la suppression.", id);
                 return NotFound();
+            }
 
             //Supprime l'image
             var currentImageFileName = model.ImageFileName;
@@ -150,10 +167,16 @@ namespace OCP5.Controllers
             var fullName = $"{model.VehicleYear.Year} {model.Brand.Name} {model.Model.Name} {model.Finition.Name}";
             
             await vehiculeRepository.RemoveDataAsync(model);
+            logger.LogInformation("Le véhicule {FullName} a été supprimé avec succès.", fullName);
             
             return View("DeletedConfirmation", fullName);
         }
         
+        /// <summary>
+        /// Retourne l'image d'un véhicule en fonction de son nom de fichier.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         [HttpGet]
         [ActionName("ImageByName")]
         public FileResult? GetImageByName(string? fileName)
@@ -162,6 +185,13 @@ namespace OCP5.Controllers
             return file;
         }
         
+        /// <summary>
+        /// Retourne la liste des modèles en fonction de l'ID de la marque.
+        /// Cette action est appelée dans le fichier js site.js lorsque l'utilisateur
+        /// change la marque dans le formulaire de création ou d'édition d'un véhicule.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [ActionName("Models")]
         public async Task<JsonResult> GetModelsAsync(int id)
