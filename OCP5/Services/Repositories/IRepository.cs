@@ -6,11 +6,32 @@ namespace OCP5.Services.Repositories;
 
 public interface IRepository<T> where T : class
 {
+    /// <summary>
+    /// Récupère un élément par son identifiant.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public T? GetById(int id);
+    
+    /// <summary>
+    /// Récupère un élément par son identifiant de manière asynchrone.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public Task<T?> GetByIdAsync(int id);
+    
+    /// <summary>
+    /// Récupère tous les éléments.
+    /// </summary>
+    /// <returns></returns>
     public IEnumerable<T> GetAll();
+    
+    /// <summary>
+    /// Récupère tous les éléments de manière asynchrone.
+    /// </summary>
+    /// <returns></returns>
     public Task<IEnumerable<T>> GetAllAsync();
-    public IEnumerable<T> Find(Expression<Func<T, bool>> expression);
+    
     public void Add(T entity);
     public Task AddAsync(T entity);
     public void AddRange(IEnumerable<T> entities);
@@ -44,11 +65,6 @@ public class Repository<T>(ApplicationDbContext context) : IRepository<T>
     public async Task AddRangeAsync(IEnumerable<T> entities)
     {
         await Context.Set<T>().AddRangeAsync(entities);
-    }
-
-    public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
-    {
-        return Context.Set<T>().Where(expression);
     }
 
     public virtual IEnumerable<T> GetAll()

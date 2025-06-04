@@ -3,7 +3,10 @@ using OCP5.Models.Entities;
 
 namespace OCP5.Data.Seeders;
 
-internal class DataSeeder
+/// <summary>
+/// Classe de peuplement de la base de données.
+/// </summary>
+internal static class DataSeeder
 {
     internal static void Initialize(IServiceProvider serviceProvider, IConfiguration config)
     {

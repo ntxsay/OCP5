@@ -6,6 +6,10 @@ namespace OCP5.Services.Repositories;
 
 public interface IFinitionRepository : IRepository<Finition>
 {
+    /// <summary>
+    /// Génère une liste de sélection de toutes les finitions.
+    /// </summary>
+    /// <returns></returns>
     Task<SelectList> GetSelectListAsync();
 }
 

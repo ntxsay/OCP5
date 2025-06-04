@@ -9,20 +9,105 @@ namespace OCP5.Services.Repositories;
 
 public interface IVehiclesRepository : IRepository<Vehicle>
 {
+    /// <summary>
+    /// Retourne le nom de l'image d'un véhicule par son identifiant de manière asynchrone.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public Task<string?> GetImageFileNameAsync(int id);
+    
+    /// <summary>
+    /// Retourne le nom de l'image d'un véhicule par son identifiant.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public string? GetImageFileName(int id);
+    
+    /// <summary>
+    /// Retourne un modèle de vue pour l'affichage d'un véhicule par son identifiant de manière asynchrone.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public Task<VehicleThumbnailViewModel?> GetThumbnailAsync(int id);
+    
+    /// <summary>
+    /// Retourne un modèle de vue pour l'affichage d'un véhicule par son identifiant.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public VehicleThumbnailViewModel? GetThumbnail(int id);
+    
+    /// <summary>
+    /// Retourne une énumération de tous les véhicules sous forme de modèles de vue pour l'affichage des vignettes de manière asynchrone.
+    /// </summary>
+    /// <returns></returns>
     public Task<IEnumerable<VehicleThumbnailViewModel>> GetAllThumbnailAsync();
+    
+    /// <summary>
+    /// Retourne une énumération de tous les véhicules sous forme de modèles de vue pour l'affichage des vignettes.
+    /// </summary>
+    /// <returns></returns>
     public IEnumerable<VehicleThumbnailViewModel> GetAllThumbnail();
+    
+    /// <summary>
+    /// Enregistre les données d'un véhicule à partir d'un modèle de vue de formulaire et de manière asynchrone.
+    /// </summary>
+    /// <param name="viewModel">Modèle de vue de formulaire</param>
+    /// <returns></returns>
     public Task SaveDataAsync(VehicleViewModel viewModel);
+    
+    /// <summary>
+    /// Retourne un modèle de véhicule de formulaire par son identifiant de manière asynchrone.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public Task<VehicleViewModel?> GetViewModelByIdAsync(int id);
+    
+    /// <summary>
+    /// Met à jour les données d'un véhicule à partir d'un modèle de vue de formulaire.
+    /// </summary>
+    /// <param name="viewModel"></param>
     public void UpdateData(VehicleViewModel viewModel);
+    
+    /// <summary>
+    /// Met à jour les données d'un véhicule à partir d'un modèle de vue de formulaire de manière asynchrone.
+    /// </summary>
+    /// <param name="viewModel"></param>
+    /// <returns></returns>
     public Task UpdateDataAsync(VehicleViewModel viewModel);
+    
+    /// <summary>
+    /// Supprime un véhicule à partir de son entité de manière asynchrone.
+    /// </summary>
+    /// <param name="entity"></param>
+    /// <returns></returns>
     public Task RemoveDataAsync(Vehicle entity);
+    
+    /// <summary>
+    /// Supprime un véhicule à partir de son identifiant de manière asynchrone.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public Task RemoveDataAsync(int id);
+    
+    /// <summary>
+    /// Supprime un véhicule à partir de son entité.
+    /// </summary>
+    /// <param name="entity"></param>
     public void RemoveData(Vehicle entity);
+    
+    /// <summary>
+    /// Vérifie si un véhicule existe par son identifiant de manière asynchrone.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public Task<bool> ExistsAsync(int id);
+    
+    /// <summary>
+    /// Retourne un dictionnaire des modèles d'une marque spécifique de manière asynchrone.
+    /// </summary>
+    /// <param name="brandId"></param>
+    /// <returns></returns>
     public Task<Dictionary<int, string>> GetModelsAsync(int brandId);
     
     /// <summary>

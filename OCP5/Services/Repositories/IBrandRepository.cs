@@ -7,7 +7,17 @@ namespace OCP5.Services.Repositories;
 
 public interface IBrandRepository : IRepository<Brand>
 {
+    /// <summary>
+    /// Génère une liste de sélection de toutes les marques.
+    /// </summary>
+    /// <returns></returns>
     Task<SelectList> GetSelectListAsync();
+    
+    /// <summary>
+    /// Retourne un dictionnaire des modèles d'une marque spécifique.
+    /// </summary>
+    /// <param name="brandId"></param>
+    /// <returns></returns>
     Task<Dictionary<int, string>> GetModelsAsync(int brandId);
 }
 

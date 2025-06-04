@@ -2,6 +2,9 @@
 
 namespace OCP5.Data.Seeders;
 
+/// <summary>
+/// Classe de peuplement des données d'identité dans la base de données.
+/// </summary>
 public static class IdentityDataSeeder
 {
     public static async Task EnsurePopulated(IApplicationBuilder app, IConfiguration config)
@@ -36,7 +39,6 @@ public static class IdentityDataSeeder
         {
             var userManager = (UserManager<IdentityUser>)scope.ServiceProvider.GetRequiredService(typeof(UserManager<IdentityUser>));
        
-            await userManager.FindByEmailAsync(adminUserName);
             var adminUser = await userManager.FindByIdAsync(adminUserName);
             if (adminUser == null)
             {
