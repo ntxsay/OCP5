@@ -36,6 +36,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
     app.SeedDatabase(app.Configuration);
+    await IdentityDataSeeder.EnsurePopulated(app, app.Configuration);
 }
 else
 {
@@ -60,5 +61,4 @@ app.MapControllerRoute(
 app.MapRazorPages()
    .WithStaticAssets();
 
-await IdentityDataSeeder.EnsurePopulated(app, app.Configuration);
 app.Run();
